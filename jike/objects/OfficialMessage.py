@@ -8,7 +8,6 @@ Object type for type: 'OFFICIAL_MESSAGE'
 from collections import namedtuple
 from .wrapper import namedtuple_with_defaults
 
-# Use `namedtuple` for simplicity and efficiency
 OfficialMessage = namedtuple_with_defaults(
     namedtuple('OfficialMessage',
                [
