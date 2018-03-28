@@ -8,6 +8,7 @@ import requests
 from .session import JikeSession
 from .qr_code import make_qrcode
 from .constants import ENDPOINTS
+from .objects import Collection, converter
 
 
 class JikeClient:
@@ -73,5 +74,5 @@ class JikeClient:
             self.load_more_key['my_collection'] = result['loadMoreKey']
         res.raise_for_status()
 
-        return result['data']
-
+        collection = (converter[item['type']](**item) for item in result['data'])
+        return Collection(collection)
