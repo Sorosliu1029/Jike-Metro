@@ -21,7 +21,7 @@ Question = namedtuple_with_defaults(
                    'liked',
                    'pictures',
                    'read',
-                   'respostCount',
+                   'repostCount',
                    'status',
                    'title',
                    'topic',

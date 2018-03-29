@@ -6,6 +6,15 @@ This module provides constants for Jike.
 
 JIKE_URI_SCHEME_FMT = 'jike://page.jk/web?url=https%3A%2F%2Fruguoapp.com%2Faccount%2Fscan%3Fuuid%3D{uuid}&displayHeader=false&displayFooter=false'
 
+RENDER2BROWSER_HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<body>
+{qrcode_svg}
+</body>
+</html>
+"""
+
 HEADERS = {
     'Origin': 'http://web.okjike.com',
     'Referer': 'http://web.okjike.com',
