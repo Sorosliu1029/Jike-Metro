@@ -69,14 +69,26 @@ HEADERS = {
     'platform': 'web',
 }
 
+_s_ = 'https'
+_d_ = 'app.jike.ruguoapp.com'
+_v_ = '1.0'
 ENDPOINTS = {
-    'create_session': 'https://app.jike.ruguoapp.com/sessions.create',
-    'wait_login': 'https://app.jike.ruguoapp.com/sessions.wait_for_login',
-    'confirm_login': 'https://app.jike.ruguoapp.com/sessions.wait_for_confirmation',
+    'create_session': f'{_s_}://{_d_}/sessions.create',
+    'wait_login': f'{_s_}://{_d_}/sessions.wait_for_login',
+    'confirm_login': f'{_s_}://{_d_}/sessions.wait_for_confirmation',
 
-    'get_my_collections': 'https://app.jike.ruguoapp.com/1.0/users/collections/list',
-    'get_my_profile': 'https://app.jike.ruguoapp.com/1.0/users/profile',
-    'get_news_feed': 'https://app.jike.ruguoapp.com/1.0/newsFeed/list',
-    'get_news_feed_unread_count': 'https://app.jike.ruguoapp.com//1.0/newsFeed/countUnreads',
+    'my_collections': f'{_s_}://{_d_}/{_v_}/users/collections/list',
+    'my_profile': f'{_s_}://{_d_}/{_v_}/users/profile',
 
+    'news_feed': f'{_s_}://{_d_}/{_v_}/newsFeed/list',
+    'news_feed_unread_count': f'{_s_}://{_d_}//{_v_}/newsFeed/countUnreads',
+    'following_update': f'{_s_}://{_d_}/{_v_}/personalUpdate/followingUpdates',
+
+    'user_post': f'{_s_}://{_d_}/{_v_}/personalUpdate/single',
+    'user_created_topic': f'{_s_}://{_d_}/{_v_}/customTopics/custom/listCreated',
+    'user_subscribed_topic': f'{_s_}://{_d_}/{_v_}/users/topics/listSubscribed',
+    'user_following': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowingList',
+    'user_follower': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowerList',
+
+    'msg_comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary'
 }

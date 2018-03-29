@@ -4,52 +4,38 @@
 Object type for collection
 """
 
-from collections.abc import Iterable, Sequence
+from .JikeSequenceBase import JikeSequenceBase
+from ..constants import ENDPOINTS
+from ..utils import converter
 
 
-class Collection(Sequence):
-    def __init__(self, collection):
+class Collection(JikeSequenceBase):
+    def __init__(self, jike_session):
         super().__init__()
-        assert isinstance(collection, Iterable)
-        self.collection = list(collection)
+        self.jike_session = jike_session
+        self.load_more_key = None
 
     def __repr__(self):
-        return f'Collection({len(self.collection)} items)'
-
-    def __getitem__(self, pos):
-        return self.collection[pos]
-
-    def __contains__(self, ele):
-        return any((ele.content == item.content for item in self.collection))
-
-    def __len__(self):
-        return len(self.collection)
-
-    def append(self, ele):
-        # TODO More strict instance check
-        assert isinstance(ele, object)
-        self.collection.append(ele)
-
-    def clear(self):
-        self.collection.clear()
-
-    def extend(self, items):
-        assert isinstance(items, Iterable)
-        self.collection.extend(list(items))
+        return f'Collection({len(self.seq)} items)'
 
     def index(self, value, start=0, stop=None):
         assert hasattr(value, 'name')
-        for idx, item in enumerate(self.collection):
-            if item.name == value.name:
+        for idx, item in enumerate(self.seq):
+            if item['name'] == value['name']:
                 return idx
         else:
             return -1
 
-    def insert(self, pos, ele):
-        self.collection.insert(pos, ele)
-
-    def __reversed__(self):
-        return reversed(self.collection)
-
-    def __setitem__(self, pos, ele):
-        self.collection[pos] = ele
+    def fetch_more(self, limit=20):
+        payload = {
+            'limit': limit,
+            'loadMoreKey': self.load_more_key,
+        }
+        res = self.jike_session.post(ENDPOINTS['my_collections'], json=payload)
+        if res.ok:
+            result = res.json()
+        res.raise_for_status()
+        self.load_more_key = result['loadMoreKey']
+        more = [converter[item['type']](**item) for item in result['data']]
+        self.extend(more)
+        return more
