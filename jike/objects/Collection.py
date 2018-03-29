@@ -18,14 +18,6 @@ class Collection(JikeSequenceBase):
     def __repr__(self):
         return f'Collection({len(self.seq)} items)'
 
-    def index(self, value, start=0, stop=None):
-        assert hasattr(value, 'name')
-        for idx, item in enumerate(self.seq):
-            if item['name'] == value['name']:
-                return idx
-        else:
-            return -1
-
     def fetch_more(self, limit=20):
         payload = {
             'limit': limit,

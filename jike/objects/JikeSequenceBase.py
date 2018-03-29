@@ -41,7 +41,7 @@ class JikeSequenceBase(Sequence):
             if item['id'] == value['id']:
                 return idx
         else:
-            return -1
+            raise ValueError(f'Value with id: {value["id"]} not found')
 
     def append(self, item):
         self.seq.append(item)
