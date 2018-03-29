@@ -37,7 +37,6 @@ def render2terminal(qr):
 
 
 def render2browser(qr):
-
     img = qr.make_image(image_factory=CustomedSvgPathImage)
     with tempfile.NamedTemporaryFile(suffix='.svg') as fp:
         img.save(fp)
@@ -45,7 +44,7 @@ def render2browser(qr):
         content = fp.read().decode('utf-8').splitlines()
     svg = content[1]
     assert svg.startswith('<svg') and svg.endswith('</svg>')
-    html = RENDER2BROWSER_HTML_TEMPLATE.format(qrcode_svg=svg)
+    html = RENDER2BROWSER_HTML_TEMPLATE.substitute(qrcode_svg=svg)
 
     _, path = tempfile.mkstemp(suffix='.html')
     with open(path, 'wt', encoding='utf-8') as fp:
@@ -66,8 +65,7 @@ class CustomedSvgPathImage(SvgPathImage):
         """
         A box_size of 10 (default) equals 10mm.
         """
-        units = Decimal(pixels) / 2
+        units = Decimal(pixels) / 3
         if not text:
             return units
         return '%smm' % units
-

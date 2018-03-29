@@ -5,21 +5,42 @@ Client that Jikers play with
 """
 
 import requests
+import json
 from .session import JikeSession
 from .qr_code import make_qrcode
 from .constants import ENDPOINTS
 from .objects import Collection
 from .utils import converter
+from .constants import AUTH_TOKEN_STORE_PATH
+
+
+def read_token():
+    with open(AUTH_TOKEN_STORE_PATH, 'rt', encoding='utf-8') as fp:
+        store = json.load(fp)
+    return store['auth_token']
+
+
+def write_token(token):
+    with open(AUTH_TOKEN_STORE_PATH, 'w+t', encoding='utf-8') as fp:
+        store = {
+            'auth_token': token
+        }
+        json.dump(store, fp, indent=2)
 
 
 class JikeClient:
     def __init__(self):
-        self.jike_session = None
+        self.auth_token = read_token()
+        if self.auth_token is None:
+            self.auth_token = self.login()
+            write_token(self.auth_token)
+        self.jike_session = JikeSession(self.auth_token)
         self.load_more_key = {
             'my_collection': None,
         }
 
-    def login(self):
+    @staticmethod
+    def login():
         def wait_login():
             res = requests.get(ENDPOINTS['wait_login'], params=uuid)
             if res.status_code == 200:
@@ -62,7 +83,7 @@ class JikeClient:
             token = confirm_login()
             attempt_counter += 1
 
-        self.jike_session = JikeSession(token)
+        return token
 
     def get_my_collection(self, limit=20):
         payload = {
@@ -77,4 +98,3 @@ class JikeClient:
 
         collection = (converter[item['type']](**item) for item in result['data'])
         return Collection(collection)
-
