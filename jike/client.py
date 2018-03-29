@@ -5,7 +5,7 @@ Client that Jikers play with
 """
 
 from .session import JikeSession
-from .objects import Collection
+from .objects import Collection, Myself
 from .utils import read_token, write_token, login
 
 
@@ -21,3 +21,6 @@ class JikeClient:
         collection = Collection(self.jike_session)
         collection.fetch_more()
         return collection
+
+    def get_my_profile(self):
+        return Myself(self.jike_session)

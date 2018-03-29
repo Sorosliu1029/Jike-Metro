@@ -21,7 +21,7 @@ class JikeSession:
     def __repr__(self):
         return f'JikeSession({self.token[:10]}...)'
 
-    def get(self, url, params):
+    def get(self, url, params=None):
         return self.session.get(url, params=params, headers=self.headers)
 
     def post(self, url, params=None, data=None, json=None):
