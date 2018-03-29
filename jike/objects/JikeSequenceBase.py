@@ -27,7 +27,7 @@ class JikeSequenceBase(Sequence):
         return self.seq[item]
 
     def __contains__(self, item):
-        return any((item['content'] == ele['content'] for ele in self.seq))
+        return any((item['id'] == ele['id'] for ele in self.seq))
 
     def __len__(self):
         return len(self.seq)
@@ -36,7 +36,12 @@ class JikeSequenceBase(Sequence):
         return reversed(self.seq)
 
     def index(self, value, start=0, stop=None):
-        pass
+        assert hasattr(value, 'id')
+        for idx, item in enumerate(self.seq[start:stop]):
+            if item['id'] == value['id']:
+                return idx
+        else:
+            return -1
 
     def append(self, item):
         self.seq.append(item)
