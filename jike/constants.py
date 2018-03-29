@@ -75,4 +75,8 @@ ENDPOINTS = {
     'confirm_login': 'https://app.jike.ruguoapp.com/sessions.wait_for_confirmation',
 
     'get_my_collections': 'https://app.jike.ruguoapp.com/1.0/users/collections/list',
+    'get_my_profile': 'https://app.jike.ruguoapp.com/1.0/users/profile',
+    'get_news_feed': 'https://app.jike.ruguoapp.com/1.0/newsFeed/list',
+    'get_news_feed_unread_count': 'https://app.jike.ruguoapp.com//1.0/newsFeed/countUnreads',
+
 }
