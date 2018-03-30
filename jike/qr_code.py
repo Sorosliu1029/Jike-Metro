@@ -49,7 +49,7 @@ def render2browser(qr):
     _, path = tempfile.mkstemp(suffix='.html')
     with open(path, 'wt', encoding='utf-8') as fp:
         fp.write(html)
-    webbrowser.open(f'file://{fp.name}')
+    webbrowser.open('file://{}'.format(fp.name))
 
 
 def render2viewer(qr):
@@ -57,7 +57,7 @@ def render2viewer(qr):
     _, path = tempfile.mkstemp(suffix='.png')
     with open(path, 'wb') as fp:
         img.save(fp)
-    webbrowser.open(f'file://{fp.name}')
+    webbrowser.open('file://{}'.format(fp.name))
 
 
 class CustomedSvgPathImage(SvgPathImage):

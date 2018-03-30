@@ -62,7 +62,7 @@ def login():
         try:
             uuid = res.json()
         except ValueError:
-            raise ValueError(f'Cannot decode to json: {res.text}')
+            raise ValueError('Cannot decode to json: {}'.format(res.text))
     res.raise_for_status()
 
     assert uuid
@@ -71,14 +71,14 @@ def login():
     logging = False
     attempt_counter = 1
     while not logging:
-        print(f'Attempt to login: {attempt_counter} time(s)')
+        print('Attempt to login: {} time(s)'.format(attempt_counter))
         logging = wait_login()
         attempt_counter += 1
 
     token = None
     attempt_counter = 1
     while token is None:
-        print(f'Wait for confirm login: {attempt_counter} time(s)')
+        print('Wait for confirm login: {} time(s)'.format(attempt_counter))
         token = confirm_login()
         attempt_counter += 1
 

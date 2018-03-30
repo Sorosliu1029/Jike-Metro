@@ -29,7 +29,7 @@ class JikeSequenceBase(Sequence):
         self.seq = []
 
     def __repr__(self):
-        return f'JikeSequenceBase({len(self.seq)} items)'
+        return 'JikeSequenceBase({} items)'.format(len(self.seq))
 
     def __getitem__(self, item):
         return self.seq[item]
@@ -49,7 +49,7 @@ class JikeSequenceBase(Sequence):
             if item['id'] == value['id']:
                 return idx
         else:
-            raise ValueError(f'Value with id: {value["id"]} not found')
+            raise ValueError('Value with id: {} not found'.format(value["id"]))
 
     def append(self, item):
         self.seq.append(item)
@@ -77,7 +77,7 @@ class JikeStreamBase:
         self.queue = deque(maxlen=maxlen)
 
     def __repr__(self):
-        return f'JikeStreamBase({len(self.queue)} items)'
+        return 'JikeStreamBase({} items)'.format(len(self.queue))
 
     def __getitem__(self, item):
         return self.queue[item]
@@ -97,7 +97,7 @@ class JikeStreamBase:
             if item['id'] == value['id']:
                 return idx
         else:
-            raise ValueError(f'Value with id: {value["id"]} not found')
+            raise ValueError('Value with id: {} not found'.format(value["id"]))
 
     def append(self, item):
         self.queue.append(item)
@@ -123,7 +123,7 @@ class JikeFetcher:
         self.load_more_key = None
 
     def __repr__(self):
-        return f'JikeFetcher({repr(self.jike_session)})'
+        return 'JikeFetcher({})'.format(repr(self.jike_session))
 
     def fetch_more(self, endpoint, payload):
         res = self.jike_session.post(endpoint, json=payload)
@@ -145,7 +145,7 @@ class List(JikeSequenceBase, JikeFetcher):
         self.converter = type_converter
 
     def __repr__(self):
-        return f'List({len(self.seq)} items)'
+        return 'List({} items)'.format(len(self.seq))
 
     def load_more(self, limit=20, extra_payload=()):
         payload = {
@@ -186,7 +186,7 @@ class Stream(JikeStreamBase, JikeFetcher):
         self.fixed_extra_payload = dict(fixed_extra_payload)
 
     def __repr__(self):
-        return f'Stream({len(self.queue)} items, with {self.queue.maxlen} capacity)'
+        return 'Stream({} items, with {} capacity)'.format(len(self.queue), self.queue.maxlen)
 
     def load_more(self, limit=20, extra_payload=()):
         payload = {

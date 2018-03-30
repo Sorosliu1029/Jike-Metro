@@ -57,7 +57,7 @@ class Myself:
         self.user = self.fetch()
 
     def __repr__(self):
-        return f'User({self.user.screenName})'
+        return 'User({})'.format(self.user.screenName)
 
     def fetch(self):
         res = self.jike_session.get(ENDPOINTS['user_profile'])

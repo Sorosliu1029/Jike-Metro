@@ -71,30 +71,32 @@ HEADERS = {
     'platform': 'web',
 }
 
-_s_ = 'https'
-_d_ = 'app.jike.ruguoapp.com'
-_v_ = '1.0'
+_f_ = {
+    '_s_': 'https',
+    '_d_': 'app.jike.ruguoapp.com',
+    '_v_': '1.0'
+}
 ENDPOINTS = {
-    'create_session': f'{_s_}://{_d_}/sessions.create',
-    'wait_login': f'{_s_}://{_d_}/sessions.wait_for_login',
-    'confirm_login': f'{_s_}://{_d_}/sessions.wait_for_confirmation',
+    'create_session': '{_s_}://{_d_}/sessions.create'.format(**_f_),
+    'wait_login': '{_s_}://{_d_}/sessions.wait_for_login'.format(**_f_),
+    'confirm_login': '{_s_}://{_d_}/sessions.wait_for_confirmation'.format(**_f_),
 
-    'my_collections': f'{_s_}://{_d_}/{_v_}/users/collections/list',
+    'my_collections': '{_s_}://{_d_}/{_v_}/users/collections/list'.format(**_f_),
 
-    'news_feed': f'{_s_}://{_d_}/{_v_}/newsFeed/list',
-    'news_feed_unread_count': f'{_s_}://{_d_}//{_v_}/newsFeed/countUnreads',
-    'following_update': f'{_s_}://{_d_}/{_v_}/personalUpdate/followingUpdates',
+    'news_feed': '{_s_}://{_d_}/{_v_}/newsFeed/list'.format(**_f_),
+    'news_feed_unread_count': '{_s_}://{_d_}//{_v_}/newsFeed/countUnreads'.format(**_f_),
+    'following_update': '{_s_}://{_d_}/{_v_}/personalUpdate/followingUpdates'.format(**_f_),
 
-    'user_profile': f'{_s_}://{_d_}/{_v_}/users/profile',
-    'user_post': f'{_s_}://{_d_}/{_v_}/personalUpdate/single',
-    'user_created_topic': f'{_s_}://{_d_}/{_v_}/customTopics/custom/listCreated',
-    'user_subscribed_topic': f'{_s_}://{_d_}/{_v_}/users/topics/listSubscribed',
-    'user_following': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowingList',
-    'user_follower': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowerList',
+    'user_profile': '{_s_}://{_d_}/{_v_}/users/profile'.format(**_f_),
+    'user_post': '{_s_}://{_d_}/{_v_}/personalUpdate/single'.format(**_f_),
+    'user_created_topic': '{_s_}://{_d_}/{_v_}/customTopics/custom/listCreated'.format(**_f_),
+    'user_subscribed_topic': '{_s_}://{_d_}/{_v_}/users/topics/listSubscribed'.format(**_f_),
+    'user_following': '{_s_}://{_d_}/{_v_}/userRelation/getFollowingList'.format(**_f_),
+    'user_follower': '{_s_}://{_d_}/{_v_}/userRelation/getFollowerList'.format(**_f_),
 
-    'comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary',
-    'topic_selected': f'{_s_}://{_d_}/{_v_}/messages/history',
-    'topic_square': f'{_s_}://{_d_}/{_v_}/squarePosts/list',
+    'comment': '{_s_}://{_d_}/{_v_}/comments/listPrimary'.format(**_f_),
+    'topic_selected': '{_s_}://{_d_}/{_v_}/messages/history'.format(**_f_),
+    'topic_square': '{_s_}://{_d_}/{_v_}/squarePosts/list'.format(**_f_),
 }
 
 PUBLIC_FIELDS = [
