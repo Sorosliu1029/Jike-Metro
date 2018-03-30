@@ -6,8 +6,8 @@ Client that Jikers play with
 
 import webbrowser
 from .session import JikeSession
-from .objects import List, Stream, User, Topic
-from .utils import read_token, write_token, login
+from .objects import List, Stream, User, Topic, OriginalPost
+from .utils import read_token, write_token, login, extract_url, extract_link
 from .constants import ENDPOINTS, URL_VALIDATION_PATTERN
 
 
@@ -28,7 +28,7 @@ class JikeClient:
 
     def get_news_feed_unread_count(self):
         res = self.jike_session.get(ENDPOINTS['news_feed_unread_count'])
-        if res.ok:
+        if res.status_code == 200:
             result = res.json()
             return result['newMessageCount']
         res.raise_for_status()
@@ -55,7 +55,7 @@ class JikeClient:
         res = self.jike_session.get(ENDPOINTS['user_profile'], {
             'username': username
         })
-        if res.ok:
+        if res.status_code == 200:
             result = res.json()
             result['user'].update(result['statsCount'])
             return User(**result['user'])
@@ -109,8 +109,47 @@ class JikeClient:
         return topic_square
 
     @staticmethod
-    def open_in_browser(url):
+    def open_in_browser(url_or_message):
+        if isinstance(url_or_message, str):
+            url = url_or_message
+        elif hasattr(url_or_message, 'linkInfo'):
+            url = url_or_message.linkInfo['linkUrl']
+        elif 'linkInfo' in url_or_message:
+            url = url_or_message['linkInfo']['linkUrl']
+        elif hasattr(url_or_message, 'content'):
+            urls = extract_url(url_or_message.content)
+            if urls:
+                for url in urls:
+                    webbrowser.open(url)
+                return
+        else:
+            print('No url found')
+            return
+
         if not URL_VALIDATION_PATTERN.match(url):
             print('Invalid url')
         else:
             webbrowser.open(url)
+
+    def post_my_thought(self, content, link=None, topic=None, pictures=None):
+        assert isinstance(content, str)
+
+        payload = {
+            'content': content
+        }
+        if link:
+            assert URL_VALIDATION_PATTERN.match(link), 'Invalid link'
+            payload.update({'linkInfo': extract_link(self.jike_session, link)})
+        if topic:
+            payload.update({'topic': topic})
+        if pictures:
+            pass
+
+        res = self.jike_session.post(ENDPOINTS['create_post'], json=payload)
+        post = None
+        if res.status_code == 200:
+            result = res.json()
+            if result['success']:
+                post = OriginalPost(**result['data'])
+        res.raise_for_status()
+        return post

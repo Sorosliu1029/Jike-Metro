@@ -11,7 +11,35 @@ containing objects:
 
 from collections import namedtuple
 from .wrapper import namedtuple_with_defaults
-from ..constants import PUBLIC_FIELDS
+
+PUBLIC_FIELDS = [
+    # item meta info
+    'id',
+    'createdAt',
+    'content',
+    'pictures',
+    'status',
+    'topic',
+    'linkInfo',
+    'target',
+    'targetType',
+    'type',
+    'user',
+    'isCommentForbidden',
+    'viewType',
+    # item interaction info
+    'likeCount',
+    'likeIcon',
+    'likeInfo',
+    'commentCount',
+    'repostCount',
+    # item personal info
+    'read',
+    'liked',
+    'collected',
+    'collectedTime',
+    'collectTime',  # seems to be Jike typo
+]
 
 # Object type for type: 'OFFICIAL_MESSAGE'
 OfficialMessage = namedtuple_with_defaults(

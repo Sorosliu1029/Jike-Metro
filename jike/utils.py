@@ -86,3 +86,47 @@ def login():
 
 def extract_url(content):
     return URL_VALIDATION_PATTERN.findall(content)
+
+
+def extract_link(jike_session, link):
+    res = jike_session.post(ENDPOINTS['extract_link'], json={
+        'link': link
+    })
+    link_info = None
+    if res.status_code == 200:
+        result = res.json()
+        if result['success']:
+            link_info = result['data']
+    res.raise_for_status()
+    return link_info
+
+
+def upload_picture(picture_path):
+    from mimetypes import guess_type
+
+    def get_uptoken():
+        res = requests.get(ENDPOINTS['picture_uptoken'], params={'bucket': 'jike'})
+        if res.ok:
+            return res.json()['uptoken']
+        res.raise_for_status()
+
+    def upload_a_picture(picture):
+        assert os.path.exists(picture)
+        name = os.path.split(picture)[1]
+        mimetype, _ = guess_type(name)
+        assert mimetype
+        with open(picture, 'rb') as fp:
+            files = {'token': (None, uptoken), 'file': (name, fp, mimetype)}
+            res = requests.post(ENDPOINTS['picture_upload'], files=files)
+        if res.status_code == 200:
+            result = res.json()
+            if result['success']:
+                return result
+        res.raise_for_status()
+
+    uptoken = get_uptoken()
+    if isinstance(picture_path, str):
+        pic_url = upload_a_picture(picture_path)
+    elif isinstance(picture_path, list):
+        pic_url = [upload_a_picture(picture) for picture in picture_path]
+    return pic_url

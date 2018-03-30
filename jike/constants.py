@@ -58,7 +58,12 @@ RENDER2BROWSER_HTML_TEMPLATE = Template("""
     <div class="footer container">
         <div class="footer_line">🚧 with 🐈 by 👷 <a href="https://web.okjike.com/user/WalleMax/" target="_blank">挖地道的</a></div>
         <div class="footer_line">GitHub: <a href="https://github.com/Sorosliu1029/Jike-Metro" target="_blank">Jike Metro</a></div>
-        <div class="footer_line"><strong>Reviews</strong>, <strong>Feedbacks</strong> and <strong>Contributions</strong> are warmly welcome.</div>
+        <div class="footer_line"><strong>Code Reviews</strong>, <strong>Feedbacks</strong> and <strong>Contributions</strong> are warmly welcome.</div>
+        <div class="footer_line">
+            <a href="https://github.com/Sorosliu1029/Jike-Metro/issues/new" target="_blank">Open an issue</a> or
+            <!--TODO Fulfill href here-->
+            <a href="#" target="_blank">Leave a comment</a>
+        </div>
     </div>
 </div>
 </body>
@@ -93,7 +98,7 @@ ENDPOINTS = {
     'my_collections': '{_s_}://{_d_}/{_v_}/users/collections/list'.format(**_f_),
 
     'news_feed': '{_s_}://{_d_}/{_v_}/newsFeed/list'.format(**_f_),
-    'news_feed_unread_count': '{_s_}://{_d_}//{_v_}/newsFeed/countUnreads'.format(**_f_),
+    'news_feed_unread_count': '{_s_}://{_d_}/{_v_}/newsFeed/countUnreads'.format(**_f_),
     'following_update': '{_s_}://{_d_}/{_v_}/personalUpdate/followingUpdates'.format(**_f_),
 
     'user_profile': '{_s_}://{_d_}/{_v_}/users/profile'.format(**_f_),
@@ -106,33 +111,9 @@ ENDPOINTS = {
     'comment': '{_s_}://{_d_}/{_v_}/comments/listPrimary'.format(**_f_),
     'topic_selected': '{_s_}://{_d_}/{_v_}/messages/history'.format(**_f_),
     'topic_square': '{_s_}://{_d_}/{_v_}/squarePosts/list'.format(**_f_),
-}
 
-PUBLIC_FIELDS = [
-    # item meta info
-    'id',
-    'createdAt',
-    'content',
-    'pictures',
-    'status',
-    'topic',
-    'linkInfo',
-    'target',
-    'targetType',
-    'type',
-    'user',
-    'isCommentForbidden',
-    'viewType',
-    # item interaction info
-    'likeCount',
-    'likeIcon',
-    'likeInfo',
-    'commentCount',
-    'repostCount',
-    # item personal info
-    'read',
-    'liked',
-    'collected',
-    'collectedTime',
-    'collectTime',  # seems to be Jike typo
-]
+    'create_post': '{_s_}://{_d_}/{_v_}/originalPosts/create'.format(**_f_),
+    'extract_link': '{_s_}://{_d_}/{_v_}/readability/extract'.format(**_f_),
+    'picture_uptoken': 'https://upload.jike.ruguoapp.com/token',
+    'picture_upload': 'https://up.qbox.me/',
+}

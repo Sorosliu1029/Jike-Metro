@@ -35,7 +35,7 @@ class JikeSequenceBase(Sequence):
         return self.seq[item]
 
     def __contains__(self, item):
-        return any((item['id'] == ele['id'] for ele in self.seq))
+        return any((item.id == ele.id for ele in self.seq))
 
     def __len__(self):
         return len(self.seq)
@@ -46,10 +46,10 @@ class JikeSequenceBase(Sequence):
     def index(self, value, start=0, stop=None):
         assert hasattr(value, 'id')
         for idx, item in enumerate(self.seq[start:stop]):
-            if item['id'] == value['id']:
+            if item.id == value.id:
                 return idx
         else:
-            raise ValueError('Value with id: {} not found'.format(value["id"]))
+            raise ValueError('Value with id: {} not found'.format(value.id))
 
     def append(self, item):
         self.seq.append(item)
@@ -83,7 +83,7 @@ class JikeStreamBase:
         return self.queue[item]
 
     def __contains__(self, item):
-        return any((item['id'] == ele['id'] for ele in self.queue))
+        return any((item.id == ele.id for ele in self.queue))
 
     def __len__(self):
         return len(self.queue)
@@ -94,10 +94,10 @@ class JikeStreamBase:
     def index(self, value, start=0, stop=None):
         assert hasattr(value, 'id')
         for idx, item in enumerate(self.queue[start:stop]):
-            if item['id'] == value['id']:
+            if item.id == value.id:
                 return idx
         else:
-            raise ValueError('Value with id: {} not found'.format(value["id"]))
+            raise ValueError('Value with id: {} not found'.format(value.id))
 
     def append(self, item):
         self.queue.append(item)
