@@ -27,10 +27,20 @@ class List(JikeSequenceBase, JikeFetcher):
         payload.update(self.fixed_extra_payload)
         payload.update(dict(extra_payload))
         result = super().fetch_more(self.endpoint, payload)
-        self.load_more_key = result['loadMoreKey']
+        try:
+            self.load_more_key = result['loadMoreKey']
+        except KeyError:
+            self.load_more_key = None
+
         if self.converter:
             more = [self.converter(**item) for item in result['data']]
         else:
             more = [converter[item['type']](**item) for item in result['data']]
         self.extend(more)
         return more
+
+    def load_all(self, extra_payload=()):
+        self.load_more(100, extra_payload)
+        while self.load_more_key is not None:
+            self.load_more(100, extra_payload)
+        return len(self.seq)
