@@ -7,6 +7,7 @@ Special class designed for Jike
 from collections import deque
 from collections.abc import Iterable, Sequence
 from ..utils import converter
+from ..constants import STREAM_CAPACITY_LIMIT
 
 
 class JikeSequenceBase(Sequence):
@@ -178,6 +179,7 @@ class Stream(JikeStreamBase, JikeFetcher):
     """
 
     def __init__(self, jike_session, endpoint, fixed_extra_payload=(), maxlen=200):
+        maxlen = min(maxlen, STREAM_CAPACITY_LIMIT)
         super().__init__(maxlen)
         JikeFetcher.__init__(self, jike_session)
         self.endpoint = endpoint
@@ -202,3 +204,6 @@ class Stream(JikeStreamBase, JikeFetcher):
         more = [converter[item['type']](**item) for item in result['data']]
         self.extend(more)
         return more
+
+    def load_full(self, extra_payload=()):
+        self.load_more(self.queue.maxlen - len(self.queue), extra_payload)

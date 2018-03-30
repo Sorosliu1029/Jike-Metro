@@ -40,6 +40,13 @@ User = namedtuple_with_defaults(
                    'verifyMessage',
                    'weiboUid',
                    'weiboUserInfo',
+
+                   'followedCount',
+                   'followingCount',
+                   'highlightedPersonalUpdates',
+                   'liked',
+                   'topicCreated',
+                   'topicSubscribed',
                ])
 )
 
@@ -47,14 +54,15 @@ User = namedtuple_with_defaults(
 class Myself:
     def __init__(self, jike_session):
         self.jike_session = jike_session
-        self.user, self.stats_count = self.fetch()
+        self.user = self.fetch()
 
     def __repr__(self):
         return f'User({self.user.screenName})'
 
     def fetch(self):
-        res = self.jike_session.get(ENDPOINTS['my_profile'])
+        res = self.jike_session.get(ENDPOINTS['user_profile'])
         if res.ok:
             result = res.json()
-            return User(**result['user']), result['statsCount']
+            result['user'].update(result['statsCount'])
+            return User(**result['user'])
         res.raise_for_status()

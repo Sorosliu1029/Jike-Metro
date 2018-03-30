@@ -11,6 +11,8 @@ JIKE_URI_SCHEME_FMT = 'jike://page.jk/web?url=https%3A%2F%2Fruguoapp.com%2Faccou
 
 AUTH_TOKEN_STORE_PATH = osp.join(osp.dirname(__file__), 'persistence', 'metro.json')
 
+STREAM_CAPACITY_LIMIT = 1000
+
 RENDER2BROWSER_HTML_TEMPLATE = Template("""
 <!DOCTYPE html>
 <html>
@@ -78,19 +80,21 @@ ENDPOINTS = {
     'confirm_login': f'{_s_}://{_d_}/sessions.wait_for_confirmation',
 
     'my_collections': f'{_s_}://{_d_}/{_v_}/users/collections/list',
-    'my_profile': f'{_s_}://{_d_}/{_v_}/users/profile',
 
     'news_feed': f'{_s_}://{_d_}/{_v_}/newsFeed/list',
     'news_feed_unread_count': f'{_s_}://{_d_}//{_v_}/newsFeed/countUnreads',
     'following_update': f'{_s_}://{_d_}/{_v_}/personalUpdate/followingUpdates',
 
+    'user_profile': f'{_s_}://{_d_}/{_v_}/users/profile',
     'user_post': f'{_s_}://{_d_}/{_v_}/personalUpdate/single',
     'user_created_topic': f'{_s_}://{_d_}/{_v_}/customTopics/custom/listCreated',
     'user_subscribed_topic': f'{_s_}://{_d_}/{_v_}/users/topics/listSubscribed',
     'user_following': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowingList',
     'user_follower': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowerList',
 
-    'comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary'
+    'comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary',
+    'topic_selected': f'{_s_}://{_d_}/{_v_}/messages/history',
+    'topic_square': f'{_s_}://{_d_}/{_v_}/squarePosts/list',
 }
 
 PUBLIC_FIELDS = [

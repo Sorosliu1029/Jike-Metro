@@ -53,6 +53,16 @@ class JikeClient:
             self.following_update.load_more()
         return self.following_update
 
+    def get_user_profile(self, username):
+        res = self.jike_session.get(ENDPOINTS['user_profile'], {
+            'username': username
+        })
+        if res.ok:
+            result = res.json()
+            result['user'].update(result['statsCount'])
+            return User(**result['user'])
+        res.raise_for_status()
+
     def get_user_post(self, username, limit=20):
         posts = List(self.jike_session, ENDPOINTS['user_post'], {'username': username})
         posts.load_more(limit)
@@ -78,5 +88,24 @@ class JikeClient:
         user_followers.load_more(limit)
         return user_followers
 
-    def get_comment(self, target_id):
-        pass
+    def get_comment(self, target_id, target_type):
+        comments = Stream(self.jike_session, ENDPOINTS['comment'], {
+            'targetId': target_id,
+            'targetType': target_type
+        })
+        comments.load_more()
+        return comments
+
+    def get_topic_selected(self, topic_id):
+        topic_selected = Stream(self.jike_session, ENDPOINTS['topic_selected'], {
+            'topic': topic_id
+        })
+        topic_selected.load_more()
+        return topic_selected
+
+    def get_topic_square(self, topic_id):
+        topic_square = Stream(self.jike_session, ENDPOINTS['topic_square'], {
+            'topicId': topic_id
+        })
+        topic_square.load_more()
+        return topic_square
