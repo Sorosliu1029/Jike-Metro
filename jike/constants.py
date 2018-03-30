@@ -4,6 +4,7 @@
 This module provides constants for Jike.
 """
 
+import re
 from string import Template
 import os.path as osp
 
@@ -12,6 +13,14 @@ JIKE_URI_SCHEME_FMT = 'jike://page.jk/web?url=https%3A%2F%2Fruguoapp.com%2Faccou
 AUTH_TOKEN_STORE_PATH = osp.join(osp.dirname(__file__), 'metro.json')
 
 STREAM_CAPACITY_LIMIT = 1000
+
+URL_VALIDATION_PATTERN = re.compile(
+    r'(?:http|ftp)s?://'  # http:// or https://
+    r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+    r'localhost|'  # localhost...
+    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+    r'(?::\d+)?'  # optional port
+    r'(?:[/?]\S*)', re.IGNORECASE)
 
 RENDER2BROWSER_HTML_TEMPLATE = Template("""
 <!DOCTYPE html>

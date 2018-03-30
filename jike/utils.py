@@ -10,8 +10,7 @@ import os
 from collections import defaultdict
 
 from .qr_code import make_qrcode
-from .constants import ENDPOINTS
-from .constants import AUTH_TOKEN_STORE_PATH
+from .constants import ENDPOINTS, AUTH_TOKEN_STORE_PATH, URL_VALIDATION_PATTERN
 from .objects.message import OfficialMessage, OriginalPost, Repost, Question, Comment
 
 converter = defaultdict(lambda: dict,
@@ -83,3 +82,7 @@ def login():
         attempt_counter += 1
 
     return token
+
+
+def extract_url(content):
+    return URL_VALIDATION_PATTERN.findall(content)

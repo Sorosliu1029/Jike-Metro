@@ -4,10 +4,11 @@
 Client that Jikers play with
 """
 
+import webbrowser
 from .session import JikeSession
 from .objects import List, Stream, User, Topic
 from .utils import read_token, write_token, login
-from .constants import ENDPOINTS
+from .constants import ENDPOINTS, URL_VALIDATION_PATTERN
 
 
 class JikeClient:
@@ -106,3 +107,10 @@ class JikeClient:
         })
         topic_square.load_more()
         return topic_square
+
+    @staticmethod
+    def open_in_browser(url):
+        if not URL_VALIDATION_PATTERN.match(url):
+            print('Invalid url')
+        else:
+            webbrowser.open(url)
