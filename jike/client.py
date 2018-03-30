@@ -5,8 +5,9 @@ Client that Jikers play with
 """
 
 from .session import JikeSession
-from .objects import Collection, Myself, NewsFeed, FollowingUpdate
+from .objects import List, Myself, NewsFeed, FollowingUpdate, User, Topic
 from .utils import read_token, write_token, login
+from .constants import ENDPOINTS
 
 
 class JikeClient:
@@ -24,7 +25,7 @@ class JikeClient:
 
     def get_my_collection(self):
         if self.collection is None:
-            self.collection = Collection(self.jike_session)
+            self.collection = List(self.jike_session, ENDPOINTS['my_collections'])
             self.collection.load_more()
         return self.collection
 
@@ -51,20 +52,30 @@ class JikeClient:
             self.following_update.load_more()
         return self.following_update
 
-    def get_user_post(self, username):
-        pass
+    def get_user_post(self, username, limit=20):
+        posts = List(self.jike_session, ENDPOINTS['user_post'], {'username': username})
+        posts.load_more(limit)
+        return posts
 
-    def get_user_created_topic(self, username):
-        pass
+    def get_user_created_topic(self, username, limit=20):
+        created_topics = List(self.jike_session, ENDPOINTS['user_created_topic'], {'username': username}, Topic)
+        created_topics.load_more(limit)
+        return created_topics
 
-    def get_user_subscribed_topic(self, username):
-        pass
+    def get_user_subscribed_topic(self, username, limit=20):
+        subscribed_topics = List(self.jike_session, ENDPOINTS['user_subscribed_topic'], {'username': username}, Topic)
+        subscribed_topics.load_more(limit)
+        return subscribed_topics
 
-    def get_user_following(self, username):
-        pass
+    def get_user_following(self, username, limit=20):
+        user_followings = List(self.jike_session, ENDPOINTS['user_following'], {'username': username}, User)
+        user_followings.load_more(limit)
+        return user_followings
 
-    def get_user_follower(self, username):
-        pass
+    def get_user_follower(self, username, limit=20):
+        user_followers = List(self.jike_session, ENDPOINTS['user_follower'], {'username': username}, User)
+        user_followers.load_more(limit)
+        return user_followers
 
     def get_comment(self, target_id):
         pass
