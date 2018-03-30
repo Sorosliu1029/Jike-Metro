@@ -6,6 +6,7 @@ utils
 
 import requests
 import json
+import os
 from collections import defaultdict
 
 from .qr_code import make_qrcode
@@ -26,13 +27,14 @@ converter = defaultdict(lambda: dict,
 
 
 def read_token():
-    with open(AUTH_TOKEN_STORE_PATH, 'rt', encoding='utf-8') as fp:
-        store = json.load(fp)
-    return store['auth_token']
+    if os.path.exists(AUTH_TOKEN_STORE_PATH):
+        with open(AUTH_TOKEN_STORE_PATH, 'rt', encoding='utf-8') as fp:
+            store = json.load(fp)
+        return store['auth_token']
 
 
 def write_token(token):
-    with open(AUTH_TOKEN_STORE_PATH, 'w+t', encoding='utf-8') as fp:
+    with open(AUTH_TOKEN_STORE_PATH, 'wt', encoding='utf-8') as fp:
         store = {
             'auth_token': token
         }

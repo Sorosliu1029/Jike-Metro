@@ -9,7 +9,7 @@ import os.path as osp
 
 JIKE_URI_SCHEME_FMT = 'jike://page.jk/web?url=https%3A%2F%2Fruguoapp.com%2Faccount%2Fscan%3Fuuid%3D{uuid}&displayHeader=false&displayFooter=false'
 
-AUTH_TOKEN_STORE_PATH = osp.join(osp.dirname(__file__), 'persistence', 'metro.json')
+AUTH_TOKEN_STORE_PATH = osp.join(osp.dirname(__file__), 'metro.json')
 
 STREAM_CAPACITY_LIMIT = 1000
 
