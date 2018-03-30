@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .JikeSpecial import List, Stream
-from .User import User, Myself
-from .Topic import Topic
+from .base import List, Stream
+from .message import OfficialMessage, OriginalPost, Repost, Question, Comment
+from .user import User
+from .topic import Topic

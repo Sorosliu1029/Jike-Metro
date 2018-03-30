@@ -5,7 +5,7 @@ Client that Jikers play with
 """
 
 from .session import JikeSession
-from .objects import List, Stream, Myself, User, Topic
+from .objects import List, Stream, User, Topic
 from .utils import read_token, write_token, login
 from .constants import ENDPOINTS
 
@@ -19,26 +19,11 @@ class JikeClient:
         self.jike_session = JikeSession(self.auth_token)
 
         self.collection = None
-        self.myself = None
         self.news_feed = None
         self.following_update = None
 
-    def get_my_collection(self):
-        if self.collection is None:
-            self.collection = List(self.jike_session, ENDPOINTS['my_collections'])
-            self.collection.load_more()
-        return self.collection
-
     def get_my_profile(self):
-        if self.myself is None:
-            self.myself = Myself(self.jike_session)
-        return self.myself
-
-    def get_news_feed(self):
-        if self.news_feed is None:
-            self.news_feed = Stream(self.jike_session, ENDPOINTS['news_feed'])
-            self.news_feed.load_more()
-        return self.news_feed
+        return self.get_user_profile(username=None)
 
     def get_news_feed_unread_count(self):
         res = self.jike_session.get(ENDPOINTS['news_feed_unread_count'])
@@ -46,6 +31,18 @@ class JikeClient:
             result = res.json()
             return result['newMessageCount']
         res.raise_for_status()
+
+    def get_my_collection(self):
+        if self.collection is None:
+            self.collection = List(self.jike_session, ENDPOINTS['my_collections'])
+            self.collection.load_more()
+        return self.collection
+
+    def get_news_feed(self):
+        if self.news_feed is None:
+            self.news_feed = Stream(self.jike_session, ENDPOINTS['news_feed'])
+            self.news_feed.load_more()
+        return self.news_feed
 
     def get_following_update(self):
         if self.following_update is None:

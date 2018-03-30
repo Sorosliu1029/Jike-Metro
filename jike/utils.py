@@ -12,17 +12,15 @@ from collections import defaultdict
 from .qr_code import make_qrcode
 from .constants import ENDPOINTS
 from .constants import AUTH_TOKEN_STORE_PATH
-from .objects.OfficialMessage import OfficialMessage
-from .objects.OriginalPost import OriginalPost
-from .objects.Question import Question
-from .objects.Repost import Repost
+from .objects.message import OfficialMessage, OriginalPost, Repost, Question, Comment
 
 converter = defaultdict(lambda: dict,
                         {
                             'OFFICIAL_MESSAGE': OfficialMessage,
                             'ORIGINAL_POST': OriginalPost,
                             'QUESTION': Question,
-                            'Repost': Repost,
+                            'REPOST': Repost,
+                            'COMMENT': Comment,
                         })
 
 

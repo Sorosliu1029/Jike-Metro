@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Special class designed for Jike
+Special class designed for Jike Metro
 """
 
 from collections import deque
