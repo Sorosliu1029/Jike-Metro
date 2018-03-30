@@ -5,7 +5,7 @@ Client that Jikers play with
 """
 
 from .session import JikeSession
-from .objects import List, Myself, NewsFeed, FollowingUpdate, User, Topic
+from .objects import List, Stream, Myself, User, Topic
 from .utils import read_token, write_token, login
 from .constants import ENDPOINTS
 
@@ -36,19 +36,20 @@ class JikeClient:
 
     def get_news_feed(self):
         if self.news_feed is None:
-            self.news_feed = NewsFeed(self.jike_session)
+            self.news_feed = Stream(self.jike_session, ENDPOINTS['news_feed'])
             self.news_feed.load_more()
         return self.news_feed
 
     def get_news_feed_unread_count(self):
-        if self.news_feed is None:
-            self.news_feed = NewsFeed(self.jike_session)
-            self.news_feed.load_more()
-        return self.news_feed.get_unread_count()
+        res = self.jike_session.get(ENDPOINTS['news_feed_unread_count'])
+        if res.ok:
+            result = res.json()
+            return result['newMessageCount']
+        res.raise_for_status()
 
     def get_following_update(self):
         if self.following_update is None:
-            self.following_update = FollowingUpdate(self.jike_session)
+            self.following_update = Stream(self.jike_session, ENDPOINTS['following_update'])
             self.following_update.load_more()
         return self.following_update
 

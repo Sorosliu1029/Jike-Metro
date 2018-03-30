@@ -56,5 +56,5 @@ class Myself:
         res = self.jike_session.get(ENDPOINTS['my_profile'])
         if res.ok:
             result = res.json()
+            return User(**result['user']), result['statsCount']
         res.raise_for_status()
-        return User(**result['user']), result['statsCount']

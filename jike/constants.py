@@ -90,7 +90,7 @@ ENDPOINTS = {
     'user_following': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowingList',
     'user_follower': f'{_s_}://{_d_}/{_v_}/userRelation/getFollowerList',
 
-    'msg_comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary'
+    'comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary'
 }
 
 PUBLIC_FIELDS = [
