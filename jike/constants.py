@@ -92,3 +92,32 @@ ENDPOINTS = {
 
     'msg_comment': f'{_s_}://{_d_}/{_v_}/comments/listPrimary'
 }
+
+PUBLIC_FIELDS = [
+    # item meta info
+    'id',
+    'createdAt',
+    'content',
+    'pictures',
+    'status',
+    'topic',
+    'linkInfo',
+    'target',
+    'targetType',
+    'type',
+    'user',
+    'isCommentForbidden',
+    'viewType',
+    # item interaction info
+    'likeCount',
+    'likeIcon',
+    'likeInfo',
+    'commentCount',
+    'repostCount',
+    # item personal info
+    'read',
+    'liked',
+    'collected',
+    'collectedTime',
+    'collectTime',  # seems to be Jike typo
+]

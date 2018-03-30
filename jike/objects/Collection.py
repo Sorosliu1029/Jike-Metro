@@ -4,29 +4,25 @@
 Object type for collection
 """
 
-from .JikeSequenceBase import JikeSequenceBase
+from .JikeSpecial import JikeSequenceBase, JikeFetcher
 from ..constants import ENDPOINTS
 from ..utils import converter
 
 
-class Collection(JikeSequenceBase):
+class Collection(JikeSequenceBase, JikeFetcher):
     def __init__(self, jike_session):
         super().__init__()
-        self.jike_session = jike_session
-        self.load_more_key = None
+        JikeFetcher.__init__(self, jike_session)
 
     def __repr__(self):
         return f'Collection({len(self.seq)} items)'
 
-    def fetch_more(self, limit=20):
+    def load_more(self, limit=20):
         payload = {
             'limit': limit,
             'loadMoreKey': self.load_more_key,
         }
-        res = self.jike_session.post(ENDPOINTS['my_collections'], json=payload)
-        if res.ok:
-            result = res.json()
-        res.raise_for_status()
+        result = super().fetch_more(ENDPOINTS['my_collections'], payload)
         self.load_more_key = result['loadMoreKey']
         more = [converter[item['type']](**item) for item in result['data']]
         self.extend(more)

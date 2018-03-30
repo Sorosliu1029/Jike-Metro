@@ -7,24 +7,11 @@ Object type for type: 'REPOST'
 
 from collections import namedtuple
 from .wrapper import namedtuple_with_defaults
+from ..constants import PUBLIC_FIELDS
 
 Repost = namedtuple_with_defaults(
     namedtuple("Repost",
-               [
-                   'collectTime',
-                   'collected',
-                   'commentCount',
-                   'content',
-                   'createdAt',
-                   'id',
-                   'likeCount',
-                   'liked',
-                   'pictures',
-                   'repostCount',
-                   'status',
-                   'target',
-                   'targetType',
-                   'type',
-                   'user',
-               ])
+               list(set(PUBLIC_FIELDS[:] + [
+
+               ])))
 )
