@@ -7,7 +7,7 @@ Client that Jikers play with
 import webbrowser
 from .session import JikeSession
 from .objects import List, Stream, User, Topic, OriginalPost
-from .utils import read_token, write_token, login, extract_url, extract_link
+from .utils import read_token, write_token, login, extract_url, extract_link, upload_picture
 from .constants import ENDPOINTS, URL_VALIDATION_PATTERN
 
 
@@ -123,16 +123,17 @@ class JikeClient:
                     webbrowser.open(url)
                 return
         else:
-            print('No url found')
-            return
+            raise ValueError('No url found')
 
         if not URL_VALIDATION_PATTERN.match(url):
-            print('Invalid url')
+            raise ValueError('Url invalid')
         else:
             webbrowser.open(url)
 
-    def post_my_thought(self, content, link=None, topic=None, pictures=None):
+    def post_my_thought(self, content, link=None, topic_id=None, pictures=None):
         assert isinstance(content, str)
+        if link and pictures:
+            raise ValueError('Jike cannot post thought with both pictures and link')
 
         payload = {
             'content': content
@@ -140,10 +141,11 @@ class JikeClient:
         if link:
             assert URL_VALIDATION_PATTERN.match(link), 'Invalid link'
             payload.update({'linkInfo': extract_link(self.jike_session, link)})
-        if topic:
-            payload.update({'topic': topic})
+        if topic_id:
+            payload.update({'submitToTopic': topic_id})
         if pictures:
-            pass
+            uploaded_picture_keys = upload_picture(pictures)
+            payload.update({'pictureKeys': uploaded_picture_keys})
 
         res = self.jike_session.post(ENDPOINTS['create_post'], json=payload)
         post = None
@@ -151,5 +153,16 @@ class JikeClient:
             result = res.json()
             if result['success']:
                 post = OriginalPost(**result['data'])
+            else:
+                raise RuntimeError('Post fail')
         res.raise_for_status()
         return post
+
+    def delete_my_post(self, post_id):
+        assert post_id, 'No post id provided'
+        res = self.jike_session.post(ENDPOINTS['delete_post'], json={
+            'id': post_id
+        })
+        if res.status_code == 200:
+            return res.json()['success']
+        res.raise_for_status()

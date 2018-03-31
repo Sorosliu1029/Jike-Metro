@@ -55,33 +55,34 @@ def login():
             confirmed = res.json()
             if confirmed['confirmed'] is True:
                 return confirmed['token']
+            else:
+                raise SystemExit('User not board Jike Metro, what a shame')
         res.raise_for_status()
 
     res = requests.get(ENDPOINTS['create_session'])
     uuid = None
-    if res.ok:
-        try:
-            uuid = res.json()
-        except ValueError:
-            raise ValueError('Cannot decode to json: {}'.format(res.text))
+    if res.status_code == 200:
+        uuid = res.json()
     res.raise_for_status()
 
-    assert uuid
+    assert uuid, 'Create session fail'
     make_qrcode(uuid)
 
     logging = False
     attempt_counter = 1
     while not logging:
-        print('Attempt to login: {} time(s)'.format(attempt_counter))
         logging = wait_login()
         attempt_counter += 1
+        if attempt_counter > 5:
+            raise SystemExit('Login takes too long, abort')
 
     token = None
     attempt_counter = 1
     while token is None:
-        print('Wait for confirm login: {} time(s)'.format(attempt_counter))
         token = confirm_login()
         attempt_counter += 1
+        if attempt_counter > 5:
+            raise SystemExit('Login takes too long, abort')
 
     return token
 
@@ -103,7 +104,7 @@ def extract_link(jike_session, link):
     return link_info
 
 
-def upload_picture(picture_path):
+def upload_picture(picture_paths):
     from mimetypes import guess_type
 
     def get_uptoken():
@@ -117,18 +118,22 @@ def upload_picture(picture_path):
         name = os.path.split(picture)[1]
         mimetype, _ = guess_type(name)
         assert mimetype
+        if not mimetype.startswith('image'):
+            raise ValueError('Cannot upload file: {}, which is not picture'.format(name))
+
+        uptoken = get_uptoken()
         with open(picture, 'rb') as fp:
             files = {'token': (None, uptoken), 'file': (name, fp, mimetype)}
             res = requests.post(ENDPOINTS['picture_upload'], files=files)
         if res.status_code == 200:
             result = res.json()
             if result['success']:
-                return result
+                return result['key']
+            else:
+                raise RuntimeError('Picture upload fail')
         res.raise_for_status()
 
-    uptoken = get_uptoken()
-    if isinstance(picture_path, str):
-        pic_url = upload_a_picture(picture_path)
-    elif isinstance(picture_path, list):
-        pic_url = [upload_a_picture(picture) for picture in picture_path]
+    if isinstance(picture_paths, str):
+        picture_paths = [picture_paths]
+    pic_url = [upload_a_picture(picture) for picture in picture_paths]
     return pic_url

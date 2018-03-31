@@ -113,6 +113,7 @@ ENDPOINTS = {
     'topic_square': '{_s_}://{_d_}/{_v_}/squarePosts/list'.format(**_f_),
 
     'create_post': '{_s_}://{_d_}/{_v_}/originalPosts/create'.format(**_f_),
+    'delete_post': '{_s_}://{_d_}/{_v_}/originalPosts/remove'.format(**_f_),
     'extract_link': '{_s_}://{_d_}/{_v_}/readability/extract'.format(**_f_),
     'picture_uptoken': 'https://upload.jike.ruguoapp.com/token',
     'picture_upload': 'https://up.qbox.me/',
