@@ -6,8 +6,7 @@ wrapper
 
 
 def stringify_namedtuple(nt):
-    return nt.__class__.__name__ + '(' + ', '.join(
-        '{}={}'.format(k, v) for k, v in zip(nt._fields, nt) if v is not None) + ')'
+    return nt.__class__.__name__ + '(id={id}, content={content})'.format(id=nt.id, content=nt.content)
 
 
 def namedtuple_with_defaults(namedtuple):
