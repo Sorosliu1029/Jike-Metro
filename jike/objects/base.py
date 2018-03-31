@@ -43,13 +43,13 @@ class JikeSequenceBase(Sequence):
     def __reversed__(self):
         return reversed(self.seq)
 
-    def index(self, value, start=0, stop=None):
-        assert hasattr(value, 'id')
+    def index(self, item, start=0, stop=None):
+        assert hasattr(item, 'id')
         for idx, item in enumerate(self.seq[start:stop]):
-            if item.id == value.id:
+            if item.id == item.id:
                 return idx
         else:
-            raise ValueError('Value with id: {} not found'.format(value.id))
+            raise ValueError('Item with id: {} not found'.format(item.id))
 
     def append(self, item):
         self.seq.append(item)
@@ -91,13 +91,13 @@ class JikeStreamBase:
     def __reversed__(self):
         return reversed(self.queue)
 
-    def index(self, value, start=0, stop=None):
-        assert hasattr(value, 'id')
+    def index(self, item, start=0, stop=None):
+        assert hasattr(item, 'id')
         for idx, item in enumerate(self.queue[start:stop]):
-            if item.id == value.id:
+            if item.id == item.id:
                 return idx
         else:
-            raise ValueError('Value with id: {} not found'.format(value.id))
+            raise ValueError('Item with id: {} not found'.format(item.id))
 
     def append(self, item):
         self.queue.append(item)

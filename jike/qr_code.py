@@ -28,7 +28,7 @@ def make_qrcode(uuid, render_choice='browser'):
         'viewer': render2viewer
     }
 
-    assert render_choice in render_choices, 'Unsupported render choice'
+    assert render_choice in render_choices, 'Unsupported render choice.\nAvailable choices: browser, viewer, terminal'
     render_choices[render_choice](qr)
 
 
@@ -37,13 +37,13 @@ def render2terminal(qr):
 
 
 def render2browser(qr):
-    img = qr.make_image(image_factory=CustomedSvgPathImage)
+    img = qr.make_image(image_factory=JikeSvgPathImage)
     with tempfile.NamedTemporaryFile(suffix='.svg') as fp:
         img.save(fp)
         fp.seek(0)
         content = fp.read().decode('utf-8').splitlines()
     svg = content[1]
-    assert svg.startswith('<svg') and svg.endswith('</svg>')
+    assert svg.startswith('<svg') and svg.endswith('</svg>'), 'Render QR code fail'
     html = RENDER2BROWSER_HTML_TEMPLATE.substitute(qrcode_svg=svg)
 
     _, path = tempfile.mkstemp(suffix='.html')
@@ -60,7 +60,7 @@ def render2viewer(qr):
     webbrowser.open('file://{}'.format(fp.name))
 
 
-class CustomedSvgPathImage(SvgPathImage):
+class JikeSvgPathImage(SvgPathImage):
     def units(self, pixels, text=True):
         """
         A box_size of 10 (default) equals 10mm.
