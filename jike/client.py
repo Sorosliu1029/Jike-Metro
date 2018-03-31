@@ -173,7 +173,7 @@ class JikeClient:
         if topic_id:
             payload.update({'submitToTopic': topic_id})
         if pictures:
-            uploaded_picture_keys = upload_picture(pictures)
+            uploaded_picture_keys = upload_pictures(pictures)
             payload.update({'pictureKeys': uploaded_picture_keys})
 
         res = self.jike_session.post(ENDPOINTS['create_post'], json=payload)
@@ -271,7 +271,7 @@ class JikeClient:
             'targetType': message.type,
         }
         if pictures:
-            uploaded_picture_keys = upload_picture(pictures)
+            uploaded_picture_keys = upload_pictures(pictures)
             payload.update({'pictureKeys': uploaded_picture_keys})
         res = self.jike_session.post(ENDPOINTS['comment_it'], json=payload)
         comment = None

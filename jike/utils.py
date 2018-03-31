@@ -8,6 +8,7 @@ import requests
 import json
 import os
 from collections import defaultdict
+from mimetypes import guess_type
 
 from .qr_code import make_qrcode
 from .constants import ENDPOINTS, AUTH_TOKEN_STORE_PATH, URL_VALIDATION_PATTERN
@@ -107,35 +108,35 @@ def extract_link(jike_session, link):
     return link_info
 
 
-def upload_picture(picture_paths):
-    from mimetypes import guess_type
+def get_uptoken():
+    res = requests.get(ENDPOINTS['picture_uptoken'], params={'bucket': 'jike'})
+    if res.ok:
+        return res.json()['uptoken']
+    res.raise_for_status()
 
-    def get_uptoken():
-        res = requests.get(ENDPOINTS['picture_uptoken'], params={'bucket': 'jike'})
-        if res.ok:
-            return res.json()['uptoken']
-        res.raise_for_status()
 
-    def upload_a_picture(picture):
-        assert os.path.exists(picture)
-        name = os.path.split(picture)[1]
-        mimetype, _ = guess_type(name)
-        assert mimetype
-        if not mimetype.startswith('image'):
-            raise ValueError('Cannot upload file: {}, which is not picture'.format(name))
+def upload_a_picture(picture):
+    assert os.path.exists(picture)
+    name = os.path.split(picture)[1]
+    mimetype, _ = guess_type(name)
+    assert mimetype
+    if not mimetype.startswith('image'):
+        raise ValueError('Cannot upload file: {}, which is not picture'.format(name))
 
-        uptoken = get_uptoken()
-        with open(picture, 'rb') as fp:
-            files = {'token': (None, uptoken), 'file': (name, fp, mimetype)}
-            res = requests.post(ENDPOINTS['picture_upload'], files=files)
-        if res.status_code == 200:
-            result = res.json()
-            if result['success']:
-                return result['key']
-            else:
-                raise RuntimeError('Picture upload fail')
-        res.raise_for_status()
+    uptoken = get_uptoken()
+    with open(picture, 'rb') as fp:
+        files = {'token': (None, uptoken), 'file': (name, fp, mimetype)}
+        res = requests.post(ENDPOINTS['picture_upload'], files=files)
+    if res.status_code == 200:
+        result = res.json()
+        if result['success']:
+            return result['key']
+        else:
+            raise RuntimeError('Picture upload fail')
+    res.raise_for_status()
 
+
+def upload_pictures(picture_paths):
     if isinstance(picture_paths, str):
         picture_paths = [picture_paths]
     pic_url = [upload_a_picture(picture) for picture in picture_paths]
