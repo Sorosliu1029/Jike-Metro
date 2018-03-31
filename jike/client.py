@@ -5,10 +5,30 @@ Client that Jikers play with
 """
 
 import webbrowser
+from threading import Timer
 from .session import JikeSession
 from .objects import List, Stream, User, Topic
 from .utils import *
-from .constants import ENDPOINTS, URL_VALIDATION_PATTERN
+from .constants import ENDPOINTS, URL_VALIDATION_PATTERN, CHECK_UNREAD_COUNT_PERIOD
+
+
+def check_unread_count_periodically(obj):
+    """
+    Run periodical task to check unread count
+
+    This implementation looks outward, improvement wanted.
+    Better not to include third-party library
+
+    :param obj: JikeClient
+    :return: None
+    """
+    obj.get_news_feed_unread_count()
+    timer = Timer(
+        CHECK_UNREAD_COUNT_PERIOD,
+        check_unread_count_periodically,
+        args=(obj,)
+    )
+    timer.start()
 
 
 class JikeClient:
@@ -23,6 +43,14 @@ class JikeClient:
         self.news_feed = None
         self.following_update = None
 
+        self.unread_count = 0
+        timer = Timer(
+            CHECK_UNREAD_COUNT_PERIOD,
+            check_unread_count_periodically,
+            args=(self,)
+        )
+        timer.start()
+
     def get_my_profile(self):
         return self.get_user_profile(username=None)
 
@@ -30,7 +58,8 @@ class JikeClient:
         res = self.jike_session.get(ENDPOINTS['news_feed_unread_count'])
         if res.status_code == 200:
             result = res.json()
-            return result['newMessageCount']
+            self.unread_count = result['newMessageCount']
+            return self.unread_count
         res.raise_for_status()
 
     def get_my_collection(self):
@@ -254,3 +283,11 @@ class JikeClient:
                 raise RuntimeError('Comment fail')
         res.raise_for_status()
         return comment
+
+    def _create_new_jike_session(self):
+        """
+        Create a new session of `requests.Session`
+
+        CAUTION: Could be used for concurrency http request, but not tested and verified by author
+        """
+        return JikeSession(self.auth_token)

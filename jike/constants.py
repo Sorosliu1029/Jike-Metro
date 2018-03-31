@@ -14,6 +14,8 @@ AUTH_TOKEN_STORE_PATH = osp.join(osp.dirname(__file__), 'metro.json')
 
 STREAM_CAPACITY_LIMIT = 1000
 
+CHECK_UNREAD_COUNT_PERIOD = 60 * 3
+
 URL_VALIDATION_PATTERN = re.compile(
     r'(?:http|ftp)s?://'  # http:// or https://
     r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
@@ -100,7 +102,7 @@ ENDPOINTS = {
     'my_collections': '{_s_}://{_d_}/{_v_}/users/collections/list'.format(**_f_),
     # main page info stream
     'news_feed': '{_s_}://{_d_}/{_v_}/newsFeed/list'.format(**_f_),
-    'news_feed_unread_count': '{_s_}://{_d_}/{_v_}/newsFeed/countUnreads'.format(**_f_),
+    'news_feed_unread_count': '{_s_}://{_d_}//{_v_}/newsFeed/countUnreads'.format(**_f_),
     'following_update': '{_s_}://{_d_}/{_v_}/personalUpdate/followingUpdates'.format(**_f_),
     # user
     'user_profile': '{_s_}://{_d_}/{_v_}/users/profile'.format(**_f_),

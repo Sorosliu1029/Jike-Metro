@@ -102,12 +102,22 @@ class JikeStreamBase:
     def append(self, item):
         self.queue.append(item)
 
+    def appendleft(self, item):
+        self.queue.appendleft(item)
+
     def clear(self):
         self.queue.clear()
 
     def extend(self, items):
         assert isinstance(items, Iterable)
         self.queue.extend(items)
+
+    def extendleft(self, items):
+        assert isinstance(items, Iterable)
+        self.queue.extendleft(items)
+
+    def pop(self):
+        self.queue.pop()
 
     def popleft(self):
         self.queue.popleft()
@@ -195,7 +205,7 @@ class Stream(JikeStreamBase, JikeFetcher):
             'loadMoreKey': self.load_more_key,
         }
         payload.update(self.fixed_extra_payload)
-        payload.update(extra_payload)
+        payload.update(dict(extra_payload))
         result = super().fetch_more(self.endpoint, payload)
         try:
             self.load_more_key = result['loadMoreKey']
@@ -207,3 +217,25 @@ class Stream(JikeStreamBase, JikeFetcher):
 
     def load_full(self, extra_payload=()):
         self.load_more(self.queue.maxlen - len(self.queue), extra_payload)
+
+    def load_update(self, unread_count, extra_payload=()):
+        assert isinstance(unread_count, int) and unread_count >= 0
+        if unread_count == 0:
+            return []
+        current_latest_id = self[0].id
+        payload = {
+            'trigger': 'user',
+            'limit': unread_count,
+            'loadMoreKey': None
+        }
+        payload.update(self.fixed_extra_payload)
+        payload.update(dict(extra_payload))
+        result = super().fetch_more(self.endpoint, payload)
+        updates = []
+        for item in result['data']:
+            if item['id'] != current_latest_id:
+                updates.append(converter[item['type']](**item))
+            else:
+                break
+        self.extendleft(reversed(updates))
+        return updates
