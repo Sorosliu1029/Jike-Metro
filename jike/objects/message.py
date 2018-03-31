@@ -77,6 +77,33 @@ Question = namedtuple_with_defaults(
                ])))
 )
 
+# Object type for type: 'PERSONAL_UPDATE_SECTION'
+PersonalUpdateSection = namedtuple_with_defaults(
+    namedtuple('PersonalUpdateSection',
+               [
+                   'items',
+                   'type',
+                   'id',
+               ])
+)
+
+# Object type for type: 'PERSONAL_UPDATE'
+PersonalUpdate = namedtuple_with_defaults(
+    namedtuple('PersonalUpdate',
+               [
+                   'action',
+                   'actionTime',
+                   'createdAt',
+                   'id',
+                   'targetUsernames',
+                   'targetUsers',
+                   'type',
+                   'updateIds',
+                   'usernames',
+                   'users',
+               ])
+)
+
 # Object type for type: 'COMMENT'
 Comment = namedtuple_with_defaults(
     namedtuple('Comment',

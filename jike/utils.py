@@ -11,7 +11,7 @@ from collections import defaultdict
 
 from .qr_code import make_qrcode
 from .constants import ENDPOINTS, AUTH_TOKEN_STORE_PATH, URL_VALIDATION_PATTERN
-from .objects.message import OfficialMessage, OriginalPost, Repost, Question, Comment
+from .objects.message import *
 
 converter = defaultdict(lambda: dict,
                         {
@@ -19,6 +19,8 @@ converter = defaultdict(lambda: dict,
                             'ORIGINAL_POST': OriginalPost,
                             'QUESTION': Question,
                             'REPOST': Repost,
+                            'PERSONAL_UPDATE': PersonalUpdate,
+                            'PERSONAL_UPDATE_SECTION': PersonalUpdateSection,
                             'COMMENT': Comment,
                         })
 
