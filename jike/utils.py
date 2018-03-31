@@ -41,25 +41,27 @@ def write_token(token):
         json.dump(store, fp, indent=2)
 
 
+def wait_login(uuid):
+    res = requests.get(ENDPOINTS['wait_login'], params=uuid)
+    if res.status_code == 200:
+        logged_in = res.json()
+        return logged_in['logged_in']
+    res.raise_for_status()
+    return False
+
+
+def confirm_login(uuid):
+    res = requests.get(ENDPOINTS['confirm_login'], params=uuid)
+    if res.status_code == 200:
+        confirmed = res.json()
+        if confirmed['confirmed'] is True:
+            return confirmed['token']
+        else:
+            raise SystemExit('User not board Jike Metro, what a shame')
+    res.raise_for_status()
+
+
 def login():
-    def wait_login():
-        res = requests.get(ENDPOINTS['wait_login'], params=uuid)
-        if res.status_code == 200:
-            logged_in = res.json()
-            return logged_in['logged_in']
-        res.raise_for_status()
-        return False
-
-    def confirm_login():
-        res = requests.get(ENDPOINTS['confirm_login'], params=uuid)
-        if res.status_code == 200:
-            confirmed = res.json()
-            if confirmed['confirmed'] is True:
-                return confirmed['token']
-            else:
-                raise SystemExit('User not board Jike Metro, what a shame')
-        res.raise_for_status()
-
     res = requests.get(ENDPOINTS['create_session'])
     uuid = None
     if res.status_code == 200:
@@ -72,7 +74,7 @@ def login():
     logging = False
     attempt_counter = 1
     while not logging:
-        logging = wait_login()
+        logging = wait_login(uuid)
         attempt_counter += 1
         if attempt_counter > 5:
             raise SystemExit('Login takes too long, abort')
@@ -80,7 +82,7 @@ def login():
     token = None
     attempt_counter = 1
     while token is None:
-        token = confirm_login()
+        token = confirm_login(uuid)
         attempt_counter += 1
         if attempt_counter > 5:
             raise SystemExit('Login takes too long, abort')
