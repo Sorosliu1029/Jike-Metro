@@ -6,8 +6,8 @@ Client that Jikers play with
 
 import webbrowser
 from .session import JikeSession
-from .objects import List, Stream, User, Topic, OriginalPost
-from .utils import read_token, write_token, login, extract_url, extract_link, upload_picture
+from .objects import List, Stream, User, Topic
+from .utils import *
 from .constants import ENDPOINTS, URL_VALIDATION_PATTERN
 
 
@@ -87,7 +87,7 @@ class JikeClient:
         return user_followers
 
     def get_comment(self, target_id, target_type):
-        comments = Stream(self.jike_session, ENDPOINTS['comment'], {
+        comments = Stream(self.jike_session, ENDPOINTS['list_comment'], {
             'targetId': target_id,
             'targetType': target_type
         })
@@ -130,7 +130,7 @@ class JikeClient:
         else:
             webbrowser.open(url)
 
-    def post_my_thought(self, content, link=None, topic_id=None, pictures=None):
+    def create_my_post(self, content, link=None, topic_id=None, pictures=None):
         assert isinstance(content, str)
         if link and pictures:
             raise ValueError('Jike cannot post thought with both pictures and link')
@@ -166,3 +166,91 @@ class JikeClient:
         if res.status_code == 200:
             return res.json()['success']
         res.raise_for_status()
+
+    def __like_action(self, message, action):
+        assert hasattr(message, 'type') and hasattr(message, 'id')
+        assert message.type in converter, 'Unsupported message type'
+        assert action in ['like_it', 'unlike_it']
+        message_type = ''.join([w.title() if i != 0 else w.lower()
+                                for i, w in enumerate(message.type.split('_'))]) + 's'
+        endpoint = ENDPOINTS[action].format(t=message_type)
+        payload = {
+            'id': message.id,
+        }
+        if hasattr(message, 'targetType'):
+            payload.update({'targetType': message.targetType})
+        res = self.jike_session.post(endpoint, json=payload)
+        if res.status_code == 200:
+            return res.json()['success']
+        res.raise_for_status()
+
+    def like_it(self, message):
+        return self.__like_action(message, 'like_it')
+
+    def unlike_it(self, message):
+        return self.__like_action(message, 'unlike_it')
+
+    def __collect_action(self, message, action):
+        assert hasattr(message, 'type') and hasattr(message, 'id')
+        assert message.type in converter, 'Unsupported message type'
+        assert action in ['collect_it', 'uncollect_it']
+        message_type = ''.join([w.title() if i != 0 else w.lower()
+                                for i, w in enumerate(message.type.split('_'))]) + 's'
+        endpoint = ENDPOINTS[action].format(t=message_type)
+        payload = {
+            'id': message.id,
+        }
+        res = self.jike_session.post(endpoint, json=payload)
+        if res.status_code == 200:
+            return res.json()['success']
+        res.raise_for_status()
+
+    def collect_it(self, message):
+        return self.__collect_action(message, 'collect_it')
+
+    def uncollect_it(self, message):
+        return self.__collect_action(message, 'uncollect_it')
+
+    def repost_it(self, content, message, sync_comment=True):
+        assert hasattr(message, 'type') and hasattr(message, 'id')
+        assert message.type in converter, 'Unsupported message type'
+        payload = {
+            'content': content,
+            'syncComment': sync_comment,
+            'targetId': message.id,
+            'targetType': message.type,
+        }
+        res = self.jike_session.post(ENDPOINTS['repost_it'], json=payload)
+        repost = None
+        if res.status_code == 200:
+            result = res.json()
+            if result['success']:
+                repost = Repost(**result['data'])
+            else:
+                raise RuntimeError('Repost fail')
+        res.raise_for_status()
+        return repost
+
+    def comment_it(self, content, message, pictures=None, sync2personal_updates=True):
+        assert hasattr(message, 'type') and hasattr(message, 'id')
+        assert message.type in converter, 'Unsupported message type'
+        payload = {
+            'content': content,
+            'pictureKeys': [],
+            'syncToPersonalUpdates': sync2personal_updates,
+            'targetId': message.id,
+            'targetType': message.type,
+        }
+        if pictures:
+            uploaded_picture_keys = upload_picture(pictures)
+            payload.update({'pictureKeys': uploaded_picture_keys})
+        res = self.jike_session.post(ENDPOINTS['comment_it'], json=payload)
+        comment = None
+        if res.status_code == 200:
+            result = res.json()
+            if result['success']:
+                comment = Comment(**result['data'])
+            else:
+                raise RuntimeError('Comment fail')
+        res.raise_for_status()
+        return comment

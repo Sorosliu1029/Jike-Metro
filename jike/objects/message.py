@@ -63,7 +63,8 @@ OriginalPost = namedtuple_with_defaults(
 Repost = namedtuple_with_defaults(
     namedtuple("Repost",
                list(set(PUBLIC_FIELDS[:] + [
-
+                   'syncCommentId',
+                   'replyToComment',
                ])))
 )
 
@@ -74,6 +75,18 @@ Question = namedtuple_with_defaults(
                    'answerCount',
                    'title',
                    'updatedAt',
+               ])))
+)
+
+# Object type for type: 'ANSWER'
+Answer = namedtuple_with_defaults(
+    namedtuple('Answer',
+               list(set(PUBLIC_FIELDS[:] + [
+                   'question',
+                   'questionId',
+                   'richtextContent',
+                   'upVoteCount',
+                   'voteTend',
                ])))
 )
 
