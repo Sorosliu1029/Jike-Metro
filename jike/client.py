@@ -54,6 +54,12 @@ class JikeClient:
     def get_my_profile(self):
         return self.get_user_profile(username=None)
 
+    def get_my_collection(self):
+        if self.collection is None:
+            self.collection = List(self.jike_session, ENDPOINTS['my_collections'])
+            self.collection.load_more()
+        return self.collection
+
     def get_news_feed_unread_count(self):
         res = self.jike_session.get(ENDPOINTS['news_feed_unread_count'])
         if res.status_code == 200:
@@ -61,12 +67,6 @@ class JikeClient:
             self.unread_count = result['newMessageCount']
             return self.unread_count
         res.raise_for_status()
-
-    def get_my_collection(self):
-        if self.collection is None:
-            self.collection = List(self.jike_session, ENDPOINTS['my_collections'])
-            self.collection.load_more()
-        return self.collection
 
     def get_news_feed(self):
         if self.news_feed is None:
@@ -196,7 +196,7 @@ class JikeClient:
             return res.json()['success']
         res.raise_for_status()
 
-    def __like_action(self, message, action):
+    def _like_action(self, message, action):
         assert hasattr(message, 'type') and hasattr(message, 'id')
         assert message.type in converter, 'Unsupported message type'
         assert action in ['like_it', 'unlike_it']
@@ -214,12 +214,12 @@ class JikeClient:
         res.raise_for_status()
 
     def like_it(self, message):
-        return self.__like_action(message, 'like_it')
+        return self._like_action(message, 'like_it')
 
     def unlike_it(self, message):
-        return self.__like_action(message, 'unlike_it')
+        return self._like_action(message, 'unlike_it')
 
-    def __collect_action(self, message, action):
+    def _collect_action(self, message, action):
         assert hasattr(message, 'type') and hasattr(message, 'id')
         assert message.type in converter, 'Unsupported message type'
         assert action in ['collect_it', 'uncollect_it']
@@ -235,12 +235,13 @@ class JikeClient:
         res.raise_for_status()
 
     def collect_it(self, message):
-        return self.__collect_action(message, 'collect_it')
+        return self._collect_action(message, 'collect_it')
 
     def uncollect_it(self, message):
-        return self.__collect_action(message, 'uncollect_it')
+        return self._collect_action(message, 'uncollect_it')
 
     def repost_it(self, content, message, sync_comment=True):
+        assert isinstance(content, str)
         assert hasattr(message, 'type') and hasattr(message, 'id')
         assert message.type in converter, 'Unsupported message type'
         payload = {
@@ -261,6 +262,7 @@ class JikeClient:
         return repost
 
     def comment_it(self, content, message, pictures=None, sync2personal_updates=True):
+        assert isinstance(content, str)
         assert hasattr(message, 'type') and hasattr(message, 'id')
         assert message.type in converter, 'Unsupported message type'
         payload = {

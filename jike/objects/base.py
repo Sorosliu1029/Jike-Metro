@@ -71,6 +71,9 @@ class JikeStreamBase:
     Intended for
     - Jike News Feed
     - Jike Following Update
+    - Jike Comment
+    - Jike Topic Selected
+    - Jike Topic Square
     """
 
     def __init__(self, maxlen=200):
