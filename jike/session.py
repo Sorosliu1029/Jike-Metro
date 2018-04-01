@@ -24,5 +24,5 @@ class JikeSession:
     def get(self, url, params=None):
         return self.session.get(url, params=params, headers=self.headers)
 
-    def post(self, url, params=None, data=None, json=None):
-        return self.session.post(url, params=params, data=data, json=json, headers=self.headers)
+    def post(self, url, params=None, json=None):
+        return self.session.post(url, params=params, json=json, headers=self.headers)
