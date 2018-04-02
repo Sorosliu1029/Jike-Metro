@@ -16,7 +16,8 @@ class TestJikeUtils(unittest.TestCase):
 
     def test_read_token(self):
         mocked_metro_json = '{"auth_token": "token"}'
-        with patch('builtins.open', mock_open(read_data=mocked_metro_json)):
+        with patch('os.path.exists', return_value=True), \
+             patch('builtins.open', mock_open(read_data=mocked_metro_json)):
             mock_token = utils.read_token()
         self.assertEqual(mock_token, 'token')
 
