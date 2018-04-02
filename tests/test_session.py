@@ -19,7 +19,7 @@ class TestJikeSession(unittest.TestCase):
         self.assertEqual(self.jike_session.headers['x-jike-app-auth-jwt'], 'token')
 
     def test_repr(self):
-        self.assertEqual(repr(self.jike_session), 'JikeSession(token...)')
+        self.assertEqual(repr(self.jike_session), 'JikeSession(token...token)')
 
     @responses.activate
     def test_get(self):

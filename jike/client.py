@@ -36,7 +36,10 @@ class JikeClient:
         self.auth_token = read_token()
         if self.auth_token is None:
             self.auth_token = login()
-            write_token(self.auth_token)
+            try:
+                write_token(self.auth_token)
+            except IOError:
+                pass
         self.jike_session = JikeSession(self.auth_token)
 
         self.collection = None
@@ -293,3 +296,12 @@ class JikeClient:
         CAUTION: Could be used for concurrency http request, but not tested and verified by author
         """
         return JikeSession(self.auth_token)
+
+    def _relogin(self):
+        """
+        Re-login in case any problem related to auth_token
+        """
+        self.auth_token = login()
+        write_token(self.auth_token)
+        self.jike_session.session.close()
+        self.jike_session = JikeSession(self.auth_token)

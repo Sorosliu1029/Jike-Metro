@@ -48,3 +48,4 @@ User = namedtuple_with_defaults(
                    'topicSubscribed',
                ])
 )
+User.__repr__ = lambda user: 'User(id={id}, screenName={screenName})'.format(id=user.id, screenName=user.screenName)
