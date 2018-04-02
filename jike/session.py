@@ -19,10 +19,10 @@ class JikeSession:
         self.session.close()
 
     def __repr__(self):
-        return f'JikeSession({self.token[:10]}...)'
+        return 'JikeSession({}...)'.format(self.token[:10])
 
-    def get(self, url, params):
+    def get(self, url, params=None):
         return self.session.get(url, params=params, headers=self.headers)
 
-    def post(self, url, params=None, data=None, json=None):
-        return self.session.post(url, params=params, data=data, json=json, headers=self.headers)
+    def post(self, url, params=None, json=None):
+        return self.session.post(url, params=params, json=json, headers=self.headers)

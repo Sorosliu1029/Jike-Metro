@@ -1,3 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .Collection import Collection
+from .base import List, Stream
+from .message import *
+from .user import User
+from .topic import Topic
