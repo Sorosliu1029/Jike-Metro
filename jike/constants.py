@@ -129,4 +129,6 @@ ENDPOINTS = {
     'uncollect_it': '{_s_}://{_d_}/{_v_}/{_p_}/uncollect'.format(**_f_),
     'repost_it': '{_s_}://{_d_}/{_v_}/reposts/add'.format(**_f_),
     'comment_it': '{_s_}://{_d_}/{_v_}/comments/add'.format(**_f_),
+    # search
+    'search_topic': '{_s_}://{_d_}/{_v_}/users/topics/search'.format(**_f_),
 }

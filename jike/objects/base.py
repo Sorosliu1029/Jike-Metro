@@ -240,3 +240,36 @@ class Stream(JikeStreamBase, JikeFetcher):
                 break
         self.extendleft(reversed(updates))
         return updates
+
+
+class JikeEmitter(JikeFetcher):
+    def __init__(self, jike_session, endpoint, fixed_extra_payload=()):
+        super().__init__(jike_session)
+        self.stopped = False
+        self.endpoint = endpoint
+        self.fixed_extra_payload = dict(fixed_extra_payload)
+
+    def __repr__(self):
+        return 'JikeEmitter({})'.format(repr(self.jike_session))
+
+    def generate(self):
+        while not self.stopped:
+            payload = {
+                'trigger': 'user',
+                'limit': 20,
+                'loadMoreKey': self.load_more_key,
+            }
+            payload.update(self.fixed_extra_payload)
+            result = super().fetch_more(self.endpoint, payload)
+            try:
+                self.load_more_key = result['loadMoreKey']
+            except KeyError:
+                self.load_more_key = None
+            if self.load_more_key is None:
+                self.stopped = True
+
+            for item in result['data']:
+                yield item
+
+    def stop(self):
+        self.stopped = True

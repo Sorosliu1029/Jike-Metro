@@ -319,5 +319,44 @@ class TestStream(unittest.TestCase):
             self.stream.load_update(-1)
 
 
+class TestJikeEmitter(unittest.TestCase):
+    def setUp(self):
+        self.mock_session = Mock()
+        self.emitter = JikeEmitter(self.mock_session, 'https://ojbk.com/')
+
+    def test_init(self):
+        self.assertFalse(self.emitter.stopped)
+        self.assertEqual(self.emitter.endpoint, 'https://ojbk.com/')
+        self.assertEqual(self.emitter.fixed_extra_payload, {})
+
+    def test_repr(self):
+        self.assertEqual(repr(self.emitter), 'JikeEmitter({})'.format(repr(self.mock_session)))
+
+    def test_generate(self):
+        data1 = [{'id': 'b'}, {'id': 'c'}]
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.side_effect = [
+            {'loadMoreKey': 'a', 'data': data1},
+            {'loadMoreKey': None, 'data': []}
+        ]
+        self.mock_session.post.return_value = mock_response
+        result = list(self.emitter.generate())
+        self.assertEqual(result, data1)
+        self.assertTrue(self.emitter.stopped)
+        self.assertIsNone(self.emitter.load_more_key)
+        self.mock_session.post.assert_called_with('https://ojbk.com/', json={
+            'trigger': 'user',
+            'limit': 20,
+            'loadMoreKey': 'a'
+        })
+        self.assertEqual(self.mock_session.post.call_count, 2)
+
+    def test_stop(self):
+        self.assertFalse(self.emitter.stopped)
+        self.emitter.stop()
+        self.assertTrue(self.emitter.stopped)
+
+
 if __name__ == '__main__':
     unittest.main()

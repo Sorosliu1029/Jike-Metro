@@ -7,7 +7,7 @@ Client that Jikers play with
 import webbrowser
 from threading import Timer
 from .session import JikeSession
-from .objects import List, Stream, User, Topic
+from .objects import List, Stream, User, Topic, JikeEmitter
 from .utils import *
 from .constants import ENDPOINTS, URL_VALIDATION_PATTERN, CHECK_UNREAD_COUNT_PERIOD
 
@@ -288,6 +288,20 @@ class JikeClient:
                 raise RuntimeError('Comment fail')
         res.raise_for_status()
         return comment
+
+    def search_topic(self, keywords):
+        assert isinstance(keywords, str)
+        topics = List(self.jike_session, ENDPOINTS['search_topic'], type_converter=dict, fixed_extra_payload={
+            'keywords': keywords,
+            'onlyUserPostEnabled': False,
+            'type': 'ALL'
+        })
+        topics.load_more()
+        return topics
+
+    def create_emitter(self, endpoint, fixed_extra_payload=()):
+        assert endpoint in ENDPOINTS.values()
+        return JikeEmitter(self.jike_session, endpoint, fixed_extra_payload)
 
     def _create_new_jike_session(self):
         """
