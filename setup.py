@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
@@ -16,7 +16,6 @@ setup(
     version=about['__version__'],
     description=about['__description__'],
     long_description=readme,
-    long_description_content_type='text/x-rst',
     url=about['__url__'],
     author=about['__author__'],
     author_email=about['__author_email__'],
@@ -40,19 +39,18 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy'
     ],
     keywords=about['__keywords__'],
-    packages=['jike'],
-    package_data={
-        'jike': ['metro.json']
+    packages=find_packages(exclude=['docs', 'tests']),
+    package_dir={
+        'jike': 'jike'
     },
-    package_dir={'jike': 'jike'},
     install_requires=[
         'requests>=2.18.0',
         'qrcode>=5.3',
     ],
-    extra_requires={
+    extras_require={
         'test': ['responses>=0.8.0']
     },
-    tests_requires=['responses>=0.8.0'],
+    tests_require=['responses>=0.8.0'],
     project_urls={
         'Bug Reports': 'https://github.com/Sorosliu1029/Jike-Metro/issues',
         'Say Thanks!': 'http://saythanks.io/to/example',
