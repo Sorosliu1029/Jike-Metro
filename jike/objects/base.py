@@ -45,11 +45,10 @@ class JikeSequenceBase(Sequence):
 
     def index(self, item, start=0, stop=None):
         assert hasattr(item, 'id')
-        for idx, item in enumerate(self.seq[start:stop]):
-            if item.id == item.id:
+        for idx, ele in enumerate(self.seq[start:stop]):
+            if ele.id == item.id:
                 return idx
-        else:
-            raise ValueError('Item with id: {} not found'.format(item.id))
+        raise ValueError('Item with id: {} not found'.format(item.id))
 
     def append(self, item):
         self.seq.append(item)
@@ -96,11 +95,10 @@ class JikeStreamBase:
 
     def index(self, item, start=0, stop=None):
         assert hasattr(item, 'id')
-        for idx, item in enumerate(self.queue[start:stop]):
-            if item.id == item.id:
+        for idx, ele in enumerate(list(self.queue)[start:stop]):
+            if ele.id == item.id:
                 return idx
-        else:
-            raise ValueError('Item with id: {} not found'.format(item.id))
+        raise ValueError('Item with id: {} not found'.format(item.id))
 
     def append(self, item):
         self.queue.append(item)
@@ -120,10 +118,10 @@ class JikeStreamBase:
         self.queue.extendleft(items)
 
     def pop(self):
-        self.queue.pop()
+        return self.queue.pop()
 
     def popleft(self):
-        self.queue.popleft()
+        return self.queue.popleft()
 
 
 class JikeFetcher:
@@ -225,7 +223,7 @@ class Stream(JikeStreamBase, JikeFetcher):
         assert isinstance(unread_count, int) and unread_count >= 0
         if unread_count == 0:
             return []
-        current_latest_id = self[0].id
+        current_latest_id = None if len(self) == 0 else self[0].id
         payload = {
             'trigger': 'user',
             'limit': unread_count,
