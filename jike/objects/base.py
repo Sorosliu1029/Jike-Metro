@@ -256,7 +256,7 @@ class JikeEmitter(JikeFetcher):
         while not self.stopped:
             payload = {
                 'trigger': 'user',
-                'limit': 20,
+                'limit': 100,
                 'loadMoreKey': self.load_more_key,
             }
             payload.update(self.fixed_extra_payload)

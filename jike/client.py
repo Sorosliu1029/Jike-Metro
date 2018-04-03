@@ -32,7 +32,7 @@ def check_unread_count_periodically(obj):
 
 
 class JikeClient:
-    def __init__(self):
+    def __init__(self, sync_unread=False):
         self.auth_token = read_token()
         if self.auth_token is None:
             self.auth_token = login()
@@ -47,12 +47,18 @@ class JikeClient:
         self.following_update = None
 
         self.unread_count = 0
-        timer = Timer(
-            CHECK_UNREAD_COUNT_PERIOD,
-            check_unread_count_periodically,
-            args=(self,)
-        )
-        timer.start()
+        self.timer = None
+        if sync_unread:
+            self.timer = Timer(
+                CHECK_UNREAD_COUNT_PERIOD,
+                check_unread_count_periodically,
+                args=(self,)
+            )
+            self.timer.start()
+
+    def __del__(self):
+        if self.timer:
+            self.timer.cancel()
 
     def get_my_profile(self):
         return self.get_user_profile(username=None)
@@ -118,10 +124,11 @@ class JikeClient:
         user_followers.load_more(limit)
         return user_followers
 
-    def get_comment(self, target_id, target_type):
+    def get_comment(self, message):
+        assert hasattr(message, 'id') and hasattr(message, 'type')
         comments = Stream(self.jike_session, ENDPOINTS['list_comment'], {
-            'targetId': target_id,
-            'targetType': target_type
+            'targetId': message.id,
+            'targetType': message.type
         })
         comments.load_more()
         return comments
@@ -190,10 +197,10 @@ class JikeClient:
         res.raise_for_status()
         return post
 
-    def delete_my_post(self, post_id):
-        assert post_id, 'No post id provided'
+    def delete_my_post(self, post):
+        assert hasattr(post, 'type') and hasattr(post, 'id')
         res = self.jike_session.post(ENDPOINTS['delete_post'], json={
-            'id': post_id
+            'id': post.id,
         })
         if res.status_code == 200:
             return res.json()['success']

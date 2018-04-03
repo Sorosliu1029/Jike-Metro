@@ -53,7 +53,7 @@ OfficialMessage = namedtuple_with_defaults(
 # Object type for type: 'ORIGINAL_POST'
 OriginalPost = namedtuple_with_defaults(
     namedtuple('OriginalPost',
-               list(set(PUBLIC_FIELDS[:] + [
+               list(set(PUBLIC_FIELDS + [
                    'messageId',
                    'poi',
                ])))
@@ -62,7 +62,7 @@ OriginalPost = namedtuple_with_defaults(
 # Object type for type: 'REPOST'
 Repost = namedtuple_with_defaults(
     namedtuple("Repost",
-               list(set(PUBLIC_FIELDS[:] + [
+               list(set(PUBLIC_FIELDS + [
                    'syncCommentId',
                    'replyToComment',
                ])))
@@ -71,7 +71,7 @@ Repost = namedtuple_with_defaults(
 # Object type for type: 'QUESTION'
 Question = namedtuple_with_defaults(
     namedtuple('Question',
-               list(set(PUBLIC_FIELDS[:] + [
+               list(set(PUBLIC_FIELDS + [
                    'answerCount',
                    'title',
                    'updatedAt',
@@ -81,7 +81,7 @@ Question = namedtuple_with_defaults(
 # Object type for type: 'ANSWER'
 Answer = namedtuple_with_defaults(
     namedtuple('Answer',
-               list(set(PUBLIC_FIELDS[:] + [
+               list(set(PUBLIC_FIELDS + [
                    'question',
                    'questionId',
                    'richtextContent',
@@ -93,49 +93,37 @@ Answer = namedtuple_with_defaults(
 # Object type for type: 'PERSONAL_UPDATE_SECTION'
 PersonalUpdateSection = namedtuple_with_defaults(
     namedtuple('PersonalUpdateSection',
-               [
+               list(set(PUBLIC_FIELDS + [
                    'items',
-                   'type',
-                   'id',
-               ])
+               ])))
 )
 
 # Object type for type: 'PERSONAL_UPDATE'
 PersonalUpdate = namedtuple_with_defaults(
     namedtuple('PersonalUpdate',
-               [
+               list(set(PUBLIC_FIELDS + [
                    'action',
                    'actionTime',
-                   'createdAt',
-                   'id',
+                   'topicIds',
+                   'topics',
                    'targetUsernames',
                    'targetUsers',
-                   'type',
                    'updateIds',
                    'usernames',
                    'users',
-               ])
+               ])))
 )
 
 # Object type for type: 'COMMENT'
 Comment = namedtuple_with_defaults(
     namedtuple('Comment',
-               [
-                   'content',
-                   'createdAt',
+               list(set(PUBLIC_FIELDS + [
                    'enablePictureComments',
                    'hotReplies',
-                   'id',
                    'level',
-                   'likeCount',
-                   'liked',
-                   'pictures',
                    'replyCount',
-                   'status',
                    'targetId',
                    'targetType',
                    'threadId',
-                   'type',
-                   'user'
-               ])
+               ])))
 )

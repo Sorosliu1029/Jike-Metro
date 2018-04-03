@@ -347,7 +347,7 @@ class TestJikeEmitter(unittest.TestCase):
         self.assertIsNone(self.emitter.load_more_key)
         self.mock_session.post.assert_called_with('https://ojbk.com/', json={
             'trigger': 'user',
-            'limit': 20,
+            'limit': 100,
             'loadMoreKey': 'a'
         })
         self.assertEqual(self.mock_session.post.call_count, 2)

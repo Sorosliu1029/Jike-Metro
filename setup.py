@@ -43,6 +43,7 @@ setup(
     },
     install_requires=[
         'requests>=2.18.0',
+        'pillow>=3.4.0',
         'qrcode>=5.3',
     ],
     extras_require={

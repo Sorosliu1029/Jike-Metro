@@ -12,7 +12,7 @@ JIKE_URI_SCHEME_FMT = 'jike://page.jk/web?url=https%3A%2F%2Fruguoapp.com%2Faccou
 
 AUTH_TOKEN_STORE_PATH = os.path.join(os.path.expanduser('~'), '.local', 'jike', 'jike_metro.json')
 if not os.path.exists(os.path.dirname(AUTH_TOKEN_STORE_PATH)):
-    os.mkdir(os.path.dirname(AUTH_TOKEN_STORE_PATH))
+    os.makedirs(os.path.dirname(AUTH_TOKEN_STORE_PATH))
 
 STREAM_CAPACITY_LIMIT = 1000
 

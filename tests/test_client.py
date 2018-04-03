@@ -23,7 +23,7 @@ class TestJikeClient(unittest.TestCase):
 
         self.read_token.return_value = 'token'
         self.timer_start.return_value = None
-        self.jike_client = JikeClient()
+        self.jike_client = JikeClient(sync_unread=True)
 
     def tearDown(self):
         del self.jike_client.jike_session
@@ -173,10 +173,14 @@ class TestJikeClient(unittest.TestCase):
         mock_users.load_more.assert_called_once()
 
     def test_get_comment(self):
+        mock_message = Mock()
+        mock_message.type = 'OFFICIAL_MESSAGE'
+        mock_message.id = '123'
+
         mock_comments = Mock()
         self.MockStream.return_value = mock_comments
         self.MockStream.load_more.return_value = None
-        result = self.jike_client.get_comment('123', 'type')
+        result = self.jike_client.get_comment(mock_message)
         self.assertEqual(result, mock_comments)
         self.MockStream.assert_called_once()
         mock_comments.load_more.assert_called_once()
@@ -255,12 +259,16 @@ class TestJikeClient(unittest.TestCase):
             self.jike_client.create_my_post('jike')
 
     def test_delete_my_post(self):
+        mock_message = Mock()
+        mock_message.type = 'ORIGINAL_POST'
+        mock_message.id = '123'
+
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.json.return_value = {'success': True}
         mock_response.raise_for_status.return_value = None
         self.mock_jike_session.post.return_value = mock_response
-        result = self.jike_client.delete_my_post('123')
+        result = self.jike_client.delete_my_post(mock_message)
         self.assertTrue(result)
         # failed call by no post id provided
         with self.assertRaises(AssertionError):
@@ -269,7 +277,7 @@ class TestJikeClient(unittest.TestCase):
         mock_response.status_code = 403
         mock_response.raise_for_status.side_effect = requests.HTTPError()
         with self.assertRaises(requests.HTTPError):
-            self.jike_client.delete_my_post('123')
+            self.jike_client.delete_my_post(mock_message)
 
     def test__like_action(self):
         mock_message = Mock()
