@@ -20,7 +20,7 @@ setup(
     author=about['__author__'],
     author_email=about['__author_email__'],
     license=about['__license__'],
-    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
+    python_requires="!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     classifiers=[
         #   4 - Beta
         #   5 - Production/Stable
@@ -29,8 +29,6 @@ setup(
         'Topic :: Software Development :: Build Tools',
         'Topic :: Internet :: WWW/HTTP :: Browsers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
@@ -48,12 +46,13 @@ setup(
         'qrcode>=5.3',
     ],
     extras_require={
-        'test': ['responses>=0.8.0']
+        'test': ['responses>=0.8.0'],
+        'doc': ['nbconvert>=5.3.0']
     },
     tests_require=['responses>=0.8.0'],
     project_urls={
         'Bug Reports': 'https://github.com/Sorosliu1029/Jike-Metro/issues',
-        'Say Thanks!': 'http://saythanks.io/to/example',
+        'Say Thanks!': 'http://saythanks.io/to/Sorosliu1029',
         'Source': 'https://github.com/Sorosliu1029/Jike-Metro/',
     },
 )

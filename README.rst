@@ -39,10 +39,11 @@ Jike Metro 🚇 是即刻镇的地铁工程，旨在提高即友的出行游览�
 **安全提醒**：Jike Metro 🚇 目前是地下工作，非官方授权，随时可能翻车，给果果 🐈 买小鱼干可保平安。
 
 .. image:: https://cdn.ruguoapp.com/Ftub2jUf092k6GYua0DTV8t-PMoR.jpg?imageView2/0/w/2000/h/400/q/50
+
 图片来源: `即刻九号工友“果果”和小伙伴们 <https://web.okjike.com/topic/55d6de4660b2719eb447649a/official>`_
 
 Jike Metro 🚇 简易乘车指南
-=========================
+==========================
 
 .. code-block:: python
 
@@ -68,17 +69,17 @@ Jike Metro 🚇 乘车体验
 
 Jike Metro 🚇 目前支持：
 
-- 获取*我的收藏*，查看自己的用户信息
-- 流式获取首页*消息*和*动态*
-- 获取某个用户的*发布的动态*、*创建的主题*、*关注的主题*、*TA关注的人*和*关注TA的人*
-- 获取某条消息/动态的*评论*
-- 获取某个主题下的*精选*和*广场*
-- 发布*个人动态*（可带图、带链接、带主题），删除个人动态
-- *点赞*、*收藏*、*评论*、*转发*某条消息/动态
-- 根据关键词*搜索主题*
-- 无限‘发射’序列型数据（可用于爬虫，基于Python生成器，请合理使用）
+- 获取自己的收藏，查看自己的用户信息
+- 流式获取首页消息和动态
+- 获取某个用户的发布的动态、创建的主题、关注的主题、TA关注的人和关注TA的人
+- 获取某条消息/动态的评论
+- 获取某个主题下的精选和广场
+- 发布个人动态（可带图、带链接、带主题），删除个人动态
+- 点赞、收藏、评论、转发某条消息/动态
+- 在浏览器中打开某条消息的原始链接
+- 根据关键词搜索主题
 
-Jike Metro 🚇 现在支持 Python 2.7 以及 Python 3.4-3.6
+Jike Metro 🚇 现在支持 Python 3.4-3.6
 
 Jike Metro 🚇 入口
 ==================
@@ -96,5 +97,6 @@ Jike Metro 🚇 基础设施
 
 Jike Metro 🚇 基于：
 
+- `即刻Web版 <https://web.okjike.com>`_
 - `requests <https://github.com/requests/requests>`_
 - `qrcode <https://github.com/lincolnloop/python-qrcode>`_
