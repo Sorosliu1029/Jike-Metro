@@ -1,5 +1,7 @@
 .ipynb_checkpoints
 *.pyc
+.tox/
+*.egg-info
 metro.json
 poc/
 .cache/
