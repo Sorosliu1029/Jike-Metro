@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="./static/style.min.css" />
+<link rel="stylesheet" href="./static/highlight.min.css" />
+<link rel="stylesheet" href="./static/temporary.min.css" />
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="./static/custom.css">
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#20056;&#36710;&#25351;&#21335;">&#20056;&#36710;&#25351;&#21335;<a class="anchor-link" href="#&#20056;&#36710;&#25351;&#21335;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">jike</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>创建即刻客户端</p>
+<p>初次使用会要求使用即刻App扫描二维码登录</p>
+<p>登录成功之后，会在<code>~/.local/jike/jike_metro.json</code>存储即刻的<code>auth_token</code>，后续的使用则会跳过扫描二维码的步骤</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">jike</span><span class="o">.</span><span class="n">JikeClient</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26597;&#30475;&#33258;&#24049;&#30340;&#29992;&#25143;&#20449;&#24687;">&#26597;&#30475;&#33258;&#24049;&#30340;&#29992;&#25143;&#20449;&#24687;<a class="anchor-link" href="#&#26597;&#30475;&#33258;&#24049;&#30340;&#29992;&#25143;&#20449;&#24687;">&#182;</a></h2><p>调用： <code>get_my_profile()</code><br>
+返回： <code>User</code>，自己的用户信息 （基于<code>collection.namedtuple</code>）</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_profile</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_my_profile</span><span class="p">()</span>
+<span class="n">my_profile</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>User(screenName=挖地道的)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_profile</span><span class="o">.</span><span class="n">screenName</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_profile</span><span class="o">.</span><span class="n">briefIntro</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>挖地道的
+Ⓙ 镇-地下工作者 👷
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#33719;&#21462;&#33258;&#24049;&#30340;&#25910;&#34255;">&#33719;&#21462;&#33258;&#24049;&#30340;&#25910;&#34255;<a class="anchor-link" href="#&#33719;&#21462;&#33258;&#24049;&#30340;&#25910;&#34255;">&#182;</a></h2><p>调用： <code>get_my_collection()</code><br>
+返回： <code>List</code>，自己的收藏 （基于<code>collection.abc.Sequence</code>）</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_collection</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_my_collection</span><span class="p">()</span>
+<span class="n">my_collection</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>List(20 items)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_collection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>OfficialMessage(id=55dd572f41904d0e00fc58f8, content=即刻果果: 分享一只曾经的童星（已光速成长）)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">guoguo</span> <span class="o">=</span> <span class="n">my_collection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">guoguo</span><span class="o">.</span><span class="n">likeCount</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>39</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>加载所有收藏</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_collection</span><span class="o">.</span><span class="n">load_all</span><span class="p">()</span>
+<span class="n">my_collection</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>List(24 items)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#27969;&#24335;&#33719;&#21462;&#39318;&#39029;&#28040;&#24687;&#21644;&#21160;&#24577;">&#27969;&#24335;&#33719;&#21462;&#39318;&#39029;&#28040;&#24687;&#21644;&#21160;&#24577;<a class="anchor-link" href="#&#27969;&#24335;&#33719;&#21462;&#39318;&#39029;&#28040;&#24687;&#21644;&#21160;&#24577;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取消息</p>
+<p>调用： <code>get_news_feed()</code><br>
+  返回： <code>Stream</code>，消息流 （基于<code>collection.deque</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">news_feed</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_news_feed</span><span class="p">()</span>
+<span class="n">news_feed</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Stream(20 items, with 200 capacity)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">news_feed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>OfficialMessage(id=5ac392c18fecf20017ec27e7, content=姑姑住进了养老院)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">news_feed</span><span class="o">.</span><span class="n">load_more</span><span class="p">()</span>
+<span class="n">news_feed</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Stream(40 items, with 200 capacity)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取动态</p>
+<p>调用： <code>get_following_update()</code><br>
+  返回： <code>Stream</code>，动态流 （基于<code>collection.deque</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">following_update</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_following_update</span><span class="p">()</span>
+<span class="n">following_update</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Stream(29 items, with 200 capacity)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">following_update</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>OriginalPost(id=5ac392cd3535890017f8a3bb, content=所以「向拉斯维加斯学习」（1972）也可以是向东京学习。而且东京更早。#ATokyoMemoir #IanBuruma)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">following_update</span><span class="o">.</span><span class="n">load_more</span><span class="p">()</span>
+<span class="n">following_update</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Stream(45 items, with 200 capacity)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取当前未读消息数</p>
+<p>调用：<code>get_news_feed_unread_count()</code><br>
+  返回：<code>int</code>，未读消息数</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">get_news_feed_unread_count</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#33719;&#21462;&#26576;&#20010;&#29992;&#25143;&#30340;&#29992;&#25143;&#20449;&#24687;&#12289;&#21457;&#24067;&#30340;&#21160;&#24577;&#12289;&#21019;&#24314;&#30340;&#20027;&#39064;&#12289;&#20851;&#27880;&#30340;&#20027;&#39064;&#12289;TA&#20851;&#27880;&#30340;&#20154;&#21644;&#20851;&#27880;TA&#30340;&#20154;">&#33719;&#21462;&#26576;&#20010;&#29992;&#25143;&#30340;&#29992;&#25143;&#20449;&#24687;&#12289;&#21457;&#24067;&#30340;&#21160;&#24577;&#12289;&#21019;&#24314;&#30340;&#20027;&#39064;&#12289;&#20851;&#27880;&#30340;&#20027;&#39064;&#12289;TA&#20851;&#27880;&#30340;&#20154;&#21644;&#20851;&#27880;TA&#30340;&#20154;<a class="anchor-link" href="#&#33719;&#21462;&#26576;&#20010;&#29992;&#25143;&#30340;&#29992;&#25143;&#20449;&#24687;&#12289;&#21457;&#24067;&#30340;&#21160;&#24577;&#12289;&#21019;&#24314;&#30340;&#20027;&#39064;&#12289;&#20851;&#27880;&#30340;&#20027;&#39064;&#12289;TA&#20851;&#27880;&#30340;&#20154;&#21644;&#20851;&#27880;TA&#30340;&#20154;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个用户的用户信息</p>
+<p>调用： <code>get_user_profile(username)</code><br>
+  参数： <code>username</code>: 指定用户的用户名（注：不是用户的显示名，而是类似 <a href="https://web.okjike.com/user/82D23B32-CF36-4C59-AD6F-D05E3552CBF3/">瓦总个人页面</a> 在浏览器地址栏中 <code>https://web.okjike.com/user/</code> 后的部分）<br>
+  返回： <code>User</code>, 用户信息 （基于<code>collection.namedtuple</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_user_profile</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;82D23B32-CF36-4C59-AD6F-D05E3552CBF3&#39;</span><span class="p">)</span>
+<span class="n">ceo</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>User(screenName=瓦恁)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo</span><span class="o">.</span><span class="n">briefIntro</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;即刻CEO&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个用户发布的动态</p>
+<p>调用： <code>get_user_post(username)</code><br>
+  参数： <code>username</code>: 指定用户的用户名<br>
+  返回： <code>List</code>, 用户发布的动态 （基于<code>collection.abc.Sequence</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_posts</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_user_post</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;82D23B32-CF36-4C59-AD6F-D05E3552CBF3&#39;</span><span class="p">)</span>
+<span class="n">ceo_posts</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>List(20 items)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_posts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Repost(id=5ac36c4913fd9f0018a1a5ca, content=“战略是现实和理想的结合。伟大的战略是极端的现实主义和极端的理想主义结合的产物”)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_posts</span><span class="o">.</span><span class="n">load_more</span><span class="p">()</span>
+<span class="n">ceo_posts</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>List(59 items)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>load_all</code> 约运行了10s</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_posts</span><span class="o">.</span><span class="n">load_all</span><span class="p">()</span>
+<span class="n">ceo_posts</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>List(3011 items)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>瓦总的第一条动态</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_posts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Repost(id=5ab20efc63cd65165515d4e2, content=想给这个主题打钱)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_posts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">createdAt</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;2016-09-14T11:30:58.283Z&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个用户创建的主题</p>
+<p>调用： <code>get_user_created_topic(username)</code><br>
+  参数： <code>username</code>: 指定用户的用户名<br>
+  返回： <code>List</code>, 用户创建的主题 （基于<code>collection.abc.Sequence</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_created_topics</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_user_created_topic</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;82D23B32-CF36-4C59-AD6F-D05E3552CBF3&#39;</span><span class="p">)</span>
+<span class="n">ceo_created_topics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Topic(id=5a8eeb3d4eb3b0001858fa87, content=又有人在微博提到yes prime minister了)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个用户关注的主题</p>
+<p>调用： <code>get_user_subscribed_topic(username)</code><br>
+  参数： <code>username</code>: 指定用户的用户名<br>
+  返回： <code>List</code>, 用户关注的主题 （基于<code>collection.abc.Sequence</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_subscribed_topics</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_user_subscribed_topic</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;82D23B32-CF36-4C59-AD6F-D05E3552CBF3&#39;</span><span class="p">)</span>
+<span class="n">ceo_subscribed_topics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Topic(id=5a41c69600074100168fd2a1, content=又有人在微博提到Reddit)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个用户关注的人</p>
+<p>调用： <code>get_user_following(username)</code><br>
+  参数： <code>username</code>: 指定用户的用户名<br>
+  返回： <code>List</code>, 用户关注的人 （基于<code>collection.abc.Sequence</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_followings</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_user_following</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;82D23B32-CF36-4C59-AD6F-D05E3552CBF3&#39;</span><span class="p">)</span>
+<span class="n">ceo_followings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>User(screenName=谌谌)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取关注某个用户的人</p>
+<p>调用： <code>get_user_follower(username)</code><br>
+  参数： <code>username</code>: 指定用户的用户名<br>
+  返回： <code>List</code>, 关注指定用户的人 （基于<code>collection.abc.Sequence</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ceo_followers</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_user_follower</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;82D23B32-CF36-4C59-AD6F-D05E3552CBF3&#39;</span><span class="p">)</span>
+<span class="n">ceo_followers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>User(screenName=夏洛克牌花生酱)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#33719;&#21462;&#26576;&#20010;&#20027;&#39064;&#19979;&#30340;&#31934;&#36873;&#21644;&#24191;&#22330;">&#33719;&#21462;&#26576;&#20010;&#20027;&#39064;&#19979;&#30340;&#31934;&#36873;&#21644;&#24191;&#22330;<a class="anchor-link" href="#&#33719;&#21462;&#26576;&#20010;&#20027;&#39064;&#19979;&#30340;&#31934;&#36873;&#21644;&#24191;&#22330;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个主题下的精选</p>
+<p>调用： <code>get_topic_selected(topic_id)</code><br>
+  参数： <code>topic_id</code>: 指定主题的id，类似于 <a href="https://web.okjike.com/topic/5701d10d5002b912000e588d/official">不好笑便利店</a> 地址栏部分在 <code>https://web.okjike.com/topic/</code>之后的部分<br>
+  返回： <code>Stream</code>, 主题精选（基于<code>collection.deque</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">topic_selected</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_topic_selected</span><span class="p">(</span><span class="n">topic_id</span><span class="o">=</span><span class="s1">&#39;5701d10d5002b912000e588d&#39;</span><span class="p">)</span>
+<span class="n">topic_selected</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>OfficialMessage(id=5ac371e0a7476600171f1a31, content=干死美团 ，碾压滴滴！饿了么和你一起拼)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>获取某个主题下的广场</p>
+<p>调用： <code>get_topic_square(topic_id)</code><br>
+  参数： <code>topic_id</code>: 指定主题的id<br>
+  返回： <code>Stream</code>, 主题广场（基于<code>collection.deque</code>）</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">topic_square</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_topic_square</span><span class="p">(</span><span class="n">topic_id</span><span class="o">=</span><span class="s1">&#39;5701d10d5002b912000e588d&#39;</span><span class="p">)</span>
+<span class="n">topic_square</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>OriginalPost(id=5a43395fc912390015ec6b6a, content=不正经，不上纲上线，偶尔开车，当然也欢迎你来代驾。)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#33719;&#21462;&#26576;&#26465;&#28040;&#24687;/&#21160;&#24577;&#30340;&#35780;&#35770;">&#33719;&#21462;&#26576;&#26465;&#28040;&#24687;/&#21160;&#24577;&#30340;&#35780;&#35770;<a class="anchor-link" href="#&#33719;&#21462;&#26576;&#26465;&#28040;&#24687;/&#21160;&#24577;&#30340;&#35780;&#35770;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>调用： <code>get_comment(message)</code><br>
+参数： <code>message</code>: 要获取评论的消息/动态<br>
+返回： <code>Stream</code>, 评论 （基于<code>collection.deque</code>）</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_comment</span><span class="p">(</span><span class="n">topic_square</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">comments</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Stream(13 items, with 200 capacity)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="n">comments</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">likeCount</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Comment(id=5a4341eb57b9c60010c707cb, content=神特么偶尔。不是在开车就是在找车吧)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#22312;&#27983;&#35272;&#22120;&#20013;&#25171;&#24320;&#26576;&#26465;&#28040;&#24687;&#30340;&#21407;&#22987;&#38142;&#25509;">&#22312;&#27983;&#35272;&#22120;&#20013;&#25171;&#24320;&#26576;&#26465;&#28040;&#24687;&#30340;&#21407;&#22987;&#38142;&#25509;<a class="anchor-link" href="#&#22312;&#27983;&#35272;&#22120;&#20013;&#25171;&#24320;&#26576;&#26465;&#28040;&#24687;&#30340;&#21407;&#22987;&#38142;&#25509;">&#182;</a></h2><p>调用：<code>open_in_browser(url_or_message)</code><br>
+参数：<code>url_or_message</code>: url 或者 message (例如<code>topic_selected[0]</code>，这是一条<code>OfficialMessage</code>)<br>
+返回：<code>None</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">open_in_browser</span><span class="p">(</span><span class="n">topic_selected</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21457;&#24067;&#20010;&#20154;&#21160;&#24577;&#65288;&#21487;&#24102;&#22270;&#12289;&#24102;&#38142;&#25509;&#12289;&#24102;&#20027;&#39064;&#65289;">&#21457;&#24067;&#20010;&#20154;&#21160;&#24577;&#65288;&#21487;&#24102;&#22270;&#12289;&#24102;&#38142;&#25509;&#12289;&#24102;&#20027;&#39064;&#65289;<a class="anchor-link" href="#&#21457;&#24067;&#20010;&#20154;&#21160;&#24577;&#65288;&#21487;&#24102;&#22270;&#12289;&#24102;&#38142;&#25509;&#12289;&#24102;&#20027;&#39064;&#65289;">&#182;</a></h2><p>调用： <code>create_my_post(content, link, topic_id, pictures)</code><br>
+参数： <code>content</code>: 要发布的内容 / <code>link</code>: 所带的链接 / <code>topic_id</code>: 所带主题的id / <code>pictures</code>: 所带图的本地地址（注：由于即刻的限制，动态不能同时带有图片和链接）<br>
+返回： <code>OriginalPost</code>，所发布的动态 （基于<code>collection.namedtuple</code>）</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_new_post</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">create_my_post</span><span class="p">(</span><span class="s1">&#39;Hello world from Jike Metro 🚇!&#39;</span><span class="p">)</span>
+<span class="n">my_new_post</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[33]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>OriginalPost(id=5ac3990c2391fb00174e3843, content=Hello world from Jike Metro 🚇!)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#28857;&#36190;&#12289;&#25910;&#34255;&#12289;&#35780;&#35770;&#12289;&#36716;&#21457;&#26576;&#26465;&#28040;&#24687;/&#21160;&#24577;">&#28857;&#36190;&#12289;&#25910;&#34255;&#12289;&#35780;&#35770;&#12289;&#36716;&#21457;&#26576;&#26465;&#28040;&#24687;/&#21160;&#24577;<a class="anchor-link" href="#&#28857;&#36190;&#12289;&#25910;&#34255;&#12289;&#35780;&#35770;&#12289;&#36716;&#21457;&#26576;&#26465;&#28040;&#24687;/&#21160;&#24577;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>点赞某条消息/动态</p>
+<p>调用： <code>like_it(message)</code><br>
+  参数： <code>message</code>: 要赞的消息/动态<br>
+  返回： <code>Bool</code>, 成功与否</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">like_it</span><span class="p">(</span><span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[34]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>取消赞某条消息/动态</p>
+<p>调用： <code>unlike_it(message)</code><br>
+  参数： <code>message</code>: 要取消赞的消息/动态<br>
+  返回： <code>Bool</code>, 成功与否</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">unlike_it</span><span class="p">(</span><span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>收藏某条消息/动态</p>
+<p>调用： <code>collect_it(message)</code><br>
+  参数： <code>message</code>: 要收藏的消息/动态<br>
+  返回： <code>Bool</code>, 成功与否</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">collect_it</span><span class="p">(</span><span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>取消收藏某条消息/动态</p>
+<p>调用： <code>uncollect_it(message)</code><br>
+  参数： <code>message</code>: 要取消收藏的消息/动态<br>
+  返回： <code>Bool</code>, 成功与否</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">uncollect_it</span><span class="p">(</span><span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[37]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>转发某条消息/动态</p>
+<p>调用： <code>repost_it(content, message, sync_comment)</code><br>
+  参数： <code>content</code>: 转发的评论内容 / <code>message</code>: 要转发的消息或动态 / <code>sync_comment</code>: 是否同步评论，默认为<code>True</code><br>
+  返回： <code>Repost</code>, 发布的转发 （基于<code>collection.namedtuple</code>)</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">repost_it</span><span class="p">(</span><span class="s1">&#39;Support Jike Metro 🚇&#39;</span><span class="p">,</span> <span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[38]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Repost(id=5ac399fd44f1020018533abc, content=Support Jike Metro 🚇)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>评论某条消息/动态</p>
+<p>调用： <code>comment_it(content, message, pictures, sync2personal_updates)</code><br>
+  参数： <code>content</code>: 要评论内容 / <code>message</code>: 要收藏的消息或动态 / <code>pictures</code>: 所带图的本地地址 / <code>sync2personal_updates</code>: 是否同步到个人动态，默认为<code>True</code><br>
+  返回： <code>Comment</code>, 发布的评论 （基于<code>collection.namedtuple</code>)</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">comment_it</span><span class="p">(</span><span class="s1">&#39;Upvote for Jike Metro 🚇&#39;</span><span class="p">,</span> <span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[39]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Comment(id=5ac39a364ce4cf001702d51a, content=Upvote for Jike Metro 🚇)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21024;&#38500;&#20010;&#20154;&#21160;&#24577;">&#21024;&#38500;&#20010;&#20154;&#21160;&#24577;<a class="anchor-link" href="#&#21024;&#38500;&#20010;&#20154;&#21160;&#24577;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>调用： <code>delete_my_post(post)</code><br>
+参数： <code>post</code>: 要删除的动态<br>
+返回： <code>Bool</code>, 成功与否</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">delete_my_post</span><span class="p">(</span><span class="n">my_new_post</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26681;&#25454;&#20851;&#38190;&#35789;&#25628;&#32034;&#20027;&#39064;">&#26681;&#25454;&#20851;&#38190;&#35789;&#25628;&#32034;&#20027;&#39064;<a class="anchor-link" href="#&#26681;&#25454;&#20851;&#38190;&#35789;&#25628;&#32034;&#20027;&#39064;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>调用： <code>search_topic(keywords)</code><br>
+参数： <code>keywords</code>：搜索的关键词<br>
+返回： <code>List</code>， 搜索到的主题， （基于<code>collection.abc.Sequence</code>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">topics</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">search_topic</span><span class="p">(</span><span class="n">keywords</span><span class="o">=</span><span class="s1">&#39;apple&#39;</span><span class="p">)</span>
+<span class="n">topics</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[41]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>List(20 items)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[42]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;Apple Watch&#39;,
+ &#39;Apple Pay新动向&#39;,
+ &#39;下一代iPhone最新情报&#39;,
+ &#39;内地有新的Apple Store开业&#39;,
+ &#39;苹果有新的官方视频&#39;,
+ &#39;苹果特惠日提醒&#39;,
+ &#39;每天一个Mac快捷键介绍&#39;,
+ &#39;Mac硬件新品及系统更新追踪&#39;,
+ &#39;Mac Stories博客“Stories”板块新文章&#39;,
+ &#39;Apple照片更新提醒&#39;,
+ &#39;Apple Newsroom 更新&#39;,
+ &#39;apple产品优惠&#39;,
+ &#39;Apple购买提醒&#39;,
+ &#39;Apple的东西有更新&#39;,
+ &#39;Apple 照片 更新提醒&#39;,
+ &#39;Apple Music照片更新提醒&#39;,
+ &#39;Apple Store 有新的官翻产品上架&#39;,
+ &#39;有值得买的APPLE苹果优惠&#39;,
+ &#39;有值得买的Apple watch优惠&#39;,
+ &#39;Apple 广告有新的配乐&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>
