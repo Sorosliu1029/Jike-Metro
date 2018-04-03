@@ -1,3 +1,4 @@
+sudo: false
 language: python
 
 matrix:
@@ -16,6 +17,14 @@ install: pip install tox
 cache: pip
 
 script: tox
+
+deploy:
+  provider: pypi
+  user: "Walle"
+  password:
+    secure: ""
+  on:
+    tags: true
 
 notifications:
   email: false
