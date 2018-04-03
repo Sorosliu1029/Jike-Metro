@@ -1,30 +1,24 @@
 sudo: false
 language: python
-
 matrix:
   include:
-    - python: 2.7
-      env: TOXENV=py27
-    - python: 3.4
-      env: TOXENV=py34
-    - python: 3.5
-      env: TOXENV=py35
-    - python: 3.6
-      env: TOXENV=py36
-
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 3.4
+    env: TOXENV=py34
+  - python: 3.5
+    env: TOXENV=py35
+  - python: 3.6
+    env: TOXENV=py36
 install: pip install tox
-
 cache: pip
-
 script: tox
-
 deploy:
   provider: pypi
-  user: "Walle"
+  user: Walle
   password:
-    secure: ""
+    secure: B69PAoo63ODLdzgnUlcyN0M0Xdm0rTtal1jSjDRQ07vLojZM9pGhLbdqKAcdfG/7rWjsMnLVAefbUHynPszoHEALKOIQhWFfi0f/KRsfUX89AEND/XA47Exacz3Mv4eb7LPTNHom+HAUlpSxItHVVWBe3Vu/e1Nb56X2Z0cno/DB9UnNrDKhtJeT4C8p58xtmnfZ/ImIt5bENa5NB2jbtCojxm7U4wP8J3nDfIiB2ehlvp7XxVsxkfholFtnRjkFlwltqbp35yFAi65aouGKjDooasQ6c34xqtZJJP/Rx0xHjdKCPc95HChpv2JIwgD4R4aZxf64cp7ErV6bk9bxEik7Qtj0BBoEJett1+fLXMWzBWBp1HlAt8UR6NDhjBBAA811tpY7GRhMqUbaQTXcWmWKZOKTOzEWpyLhbIgC8/3A6tmuzm67GrkfF15vOfYtoRGU+nhU4vPESrPQcTGEZetxkvC24S/diD5VJ6Ar/wPF84b7o5gZU7xao3AUi8VCSfCD76BThL9riRGQfvY0E4EZO/tdpgQ+Yea1Ql8Qt7ZJD6cHnOPiHJLqkVa70DSdgCWBZmOYP2s6bct760betXKvYlNMEK3rbfg0TGDfr+srUWe9qq686nY5w+w008MuJrgvljFvL9du8dG65mV+5mZdXlTI+ZE2iLATcORc+yQ=
   on:
     tags: true
-
 notifications:
   email: false
