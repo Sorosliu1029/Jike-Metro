@@ -19,7 +19,7 @@ Jike Client
 from .client import JikeClient
 
 __title__ = 'jike'
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __description__ = 'Ⓙ Jike Metro: Unofficial Jike Client'
 __url__ = 'https://github.com/Sorosliu1029/Jike-Metro'
 __author__ = 'Soros Liu'
