@@ -16,7 +16,7 @@ def check_unread_count_periodically(obj):
     """
     Run periodical task to check unread count
 
-    This implementation looks outward, improvement wanted.
+    This implementation looks awkward, improvement wanted.
     Better not to include third-party library
 
     :param obj: JikeClient
@@ -307,6 +307,11 @@ class JikeClient:
         return topics
 
     def create_emitter(self, endpoint, fixed_extra_payload=()):
+        """
+        BOOM! You find easter egg in this project, now you can use this function to crawl Jike.
+
+        USE IT WISELY !
+        """
         assert endpoint in ENDPOINTS.values()
         return JikeEmitter(self.jike_session, endpoint, fixed_extra_payload)
 
