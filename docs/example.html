@@ -312,6 +312,323 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#24215;&#38271;&#21457;&#36710;&#30340;&#26102;&#38388;&#20998;&#24067;">&#24215;&#38271;&#21457;&#36710;&#30340;&#26102;&#38388;&#20998;&#24067;<a class="anchor-link" href="#&#24215;&#38271;&#21457;&#36710;&#30340;&#26102;&#38388;&#20998;&#24067;">&#182;</a></h2><p>基于最近一个月 <a href="https://web.okjike.com/topic/5701d10d5002b912000e588d/official">不好笑便利店</a> 主题下的精选，由评论判断是否开车</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 不好笑便利店 的主题精选</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_topic_selected</span><span class="p">(</span><span class="n">topic_id</span><span class="o">=</span><span class="s1">&#39;5701d10d5002b912000e588d&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="n">a_month_ago</span> <span class="o">=</span> <span class="n">today</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">date_parse</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comment_keywords</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;奶&#39;</span><span class="p">,</span> <span class="s1">&#39;任务&#39;</span><span class="p">,</span> <span class="s1">&#39;爱尔兰&#39;</span><span class="p">,</span> <span class="s1">&#39;不动产&#39;</span><span class="p">,</span> <span class="s1">&#39;发车&#39;</span><span class="p">,</span> <span class="s1">&#39;开车&#39;</span><span class="p">,</span> <span class="s1">&#39;上车&#39;</span><span class="p">,</span> <span class="s1">&#39;窑子&#39;</span><span class="p">,</span> <span class="s1">&#39;黄色&#39;</span><span class="p">,</span> <span class="s1">&#39;黄即&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;片子&#39;</span><span class="p">,</span> <span class="s1">&#39;看片&#39;</span><span class="p">,</span> <span class="s1">&#39;借一部&#39;</span><span class="p">,</span> <span class="s1">&#39;资源&#39;</span><span class="p">,</span> <span class="s1">&#39;举报&#39;</span><span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="n">time_periods</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">message_date</span> <span class="o">=</span> <span class="n">today</span>
+<span class="k">while</span> <span class="n">message_date</span> <span class="o">&gt;</span> <span class="n">a_month_ago</span><span class="p">:</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">selected</span><span class="o">.</span><span class="n">load_more</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+        <span class="n">message_date</span> <span class="o">=</span> <span class="n">date_parse</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">createdAt</span><span class="p">)</span>
+        <span class="n">comments</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_comment</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">comments</span><span class="o">.</span><span class="n">load_full</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">comments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">keyword</span> <span class="ow">in</span> <span class="n">comment</span><span class="o">.</span><span class="n">content</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">comment_keywords</span><span class="p">)):</span>
+                <span class="n">time_periods</span><span class="p">[</span><span class="n">message_date</span><span class="o">.</span><span class="n">hour</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># UTC time, should +8 for Asia/Shanghai</span>
+<span class="n">adjusted_time_periods</span> <span class="o">=</span> <span class="p">[((</span><span class="n">h</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span><span class="o">%</span><span class="k">24</span>, time_periods[h]) for h in range(24)]
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">adjusted_time_periods</span> <span class="o">=</span> <span class="n">adjusted_time_periods</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="o">+</span> <span class="n">adjusted_time_periods</span><span class="p">[:</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">adjusted_time_periods</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(0, 0),
+ (1, 0),
+ (2, 0),
+ (3, 0),
+ (4, 0),
+ (5, 0),
+ (6, 0),
+ (7, 0),
+ (8, 13),
+ (9, 20),
+ (10, 8),
+ (11, 20),
+ (12, 33),
+ (13, 30),
+ (14, 42),
+ (15, 71),
+ (16, 17),
+ (17, 37),
+ (18, 41),
+ (19, 31),
+ (20, 41),
+ (21, 38),
+ (22, 18),
+ (23, 2)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>店长最可能发车的三个时间段</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_cnt</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">cnt</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">adjusted_time_periods</span><span class="p">))</span>
+
+<span class="n">drive_time</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">adjusted_time_periods</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">period</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">drive_time</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;发车时间: </span><span class="si">{}</span><span class="s1">点，发车概率: </span><span class="si">{:.2%}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">/</span> <span class="n">total_cnt</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>发车时间: 15点，发车概率: 15.37%
+发车时间: 14点，发车概率: 9.09%
+发车时间: 18点，发车概率: 8.87%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">adjusted_time_periods</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(0, 0),
+ (1, 0),
+ (2, 0),
+ (3, 0),
+ (4, 0),
+ (5, 0),
+ (6, 0),
+ (7, 0),
+ (8, 13),
+ (9, 20),
+ (10, 8),
+ (11, 20),
+ (12, 33),
+ (13, 30),
+ (14, 42),
+ (15, 71),
+ (16, 17),
+ (17, 37),
+ (18, 41),
+ (19, 31),
+ (20, 41),
+ (21, 38),
+ (22, 18),
+ (23, 2)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>店长发车的时间分布</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">adjusted_time_periods</span><span class="p">:</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">h</span><span class="p">]</span><span class="o">*</span><span class="n">cnt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hour of a day&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Drive count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of drive statistics&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <p><span style="float: left">Prev: <a href="./index.html">乘车指南 🚇</a></span>
 <span style="float: right">Next: <a href="./jike_api.html">即刻Web API</a></span></p>
