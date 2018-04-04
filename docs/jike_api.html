@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>jike_api</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="./static/style.min.css" />
+<link rel="stylesheet" href="./static/highlight.min.css" />
+<link rel="stylesheet" href="./static/temporary.min.css" />
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="./static/custom.css">
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#21363;&#21051;Web-API">&#21363;&#21051;Web API<a class="anchor-link" href="#&#21363;&#21051;Web-API">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><span style="float: left">Prev: <a href="./example.html">简单的例子 🌰</a></span>
+<span style="float: right">Next: None</span></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">jike.constants</span> <span class="k">import</span> <span class="n">ENDPOINTS</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ENDPOINTS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;</span><span class="si">{t}</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Function: </span><span class="si">{fn}</span><span class="s1">, URL: </span><span class="si">{url}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Function: create_session, URL: https://app.jike.ruguoapp.com/sessions.create
+
+Function: wait_login, URL: https://app.jike.ruguoapp.com/sessions.wait_for_login
+
+Function: confirm_login, URL: https://app.jike.ruguoapp.com/sessions.wait_for_confirmation
+
+Function: my_collections, URL: https://app.jike.ruguoapp.com/1.0/users/collections/list
+
+Function: news_feed, URL: https://app.jike.ruguoapp.com/1.0/newsFeed/list
+
+Function: news_feed_unread_count, URL: https://app.jike.ruguoapp.com//1.0/newsFeed/countUnreads
+
+Function: following_update, URL: https://app.jike.ruguoapp.com/1.0/personalUpdate/followingUpdates
+
+Function: user_profile, URL: https://app.jike.ruguoapp.com/1.0/users/profile
+
+Function: user_post, URL: https://app.jike.ruguoapp.com/1.0/personalUpdate/single
+
+Function: user_created_topic, URL: https://app.jike.ruguoapp.com/1.0/customTopics/custom/listCreated
+
+Function: user_subscribed_topic, URL: https://app.jike.ruguoapp.com/1.0/users/topics/listSubscribed
+
+Function: user_following, URL: https://app.jike.ruguoapp.com/1.0/userRelation/getFollowingList
+
+Function: user_follower, URL: https://app.jike.ruguoapp.com/1.0/userRelation/getFollowerList
+
+Function: topic_selected, URL: https://app.jike.ruguoapp.com/1.0/messages/history
+
+Function: topic_square, URL: https://app.jike.ruguoapp.com/1.0/squarePosts/list
+
+Function: list_comment, URL: https://app.jike.ruguoapp.com/1.0/comments/listPrimary
+
+Function: create_post, URL: https://app.jike.ruguoapp.com/1.0/originalPosts/create
+
+Function: delete_post, URL: https://app.jike.ruguoapp.com/1.0/originalPosts/remove
+
+Function: extract_link, URL: https://app.jike.ruguoapp.com/1.0/readability/extract
+
+Function: picture_uptoken, URL: https://upload.jike.ruguoapp.com/token
+
+Function: picture_upload, URL: https://up.qbox.me/
+
+Function: repost_it, URL: https://app.jike.ruguoapp.com/1.0/reposts/add
+
+Function: comment_it, URL: https://app.jike.ruguoapp.com/1.0/comments/add
+
+Function: search_topic, URL: https://app.jike.ruguoapp.com/1.0/users/topics/search
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>以下的API调用需要对应特定的消息类型</p>
+<p>假设消息类型为'ORIGINAL_MESSAGE', 则对应的URL部分为'originalMessages'</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">message_type</span> <span class="o">=</span> <span class="s1">&#39;originalMessages&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ENDPOINTS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;</span><span class="si">{t}</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">message_type</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Function: </span><span class="si">{fn}</span><span class="s1">, URL: </span><span class="si">{url}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Function: like_it, URL: https://app.jike.ruguoapp.com/1.0/originalMessages/like
+
+Function: unlike_it, URL: https://app.jike.ruguoapp.com/1.0/originalMessages/unlike
+
+Function: collect_it, URL: https://app.jike.ruguoapp.com/1.0/originalMessages/collect
+
+Function: uncollect_it, URL: https://app.jike.ruguoapp.com/1.0/originalMessages/uncollect
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>各个URL具体的HTTP BODY在这里就不赘述了，感兴趣的可以在浏览器调试器里追踪查看API调用的 json payload 和 json response</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<p><span style="float: left">Prev: <a href="./example.html">简单的例子 🌰</a></span>
+<span style="float: right">Next: None</span></p>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>
