@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>objects</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="./static/style.min.css" />
+<link rel="stylesheet" href="./static/highlight.min.css" />
+<link rel="stylesheet" href="./static/temporary.min.css" />
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="./static/custom.css">
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Jike-Metro-&#128647;-&#20013;&#21508;&#20010;&#31867;&#30340;&#21487;&#29992;&#23646;&#24615;">Jike Metro &#128647; &#20013;&#21508;&#20010;&#31867;&#30340;&#21487;&#29992;&#23646;&#24615;<a class="anchor-link" href="#Jike-Metro-&#128647;-&#20013;&#21508;&#20010;&#31867;&#30340;&#21487;&#29992;&#23646;&#24615;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><span style="float: left">Prev: <a href="./example.html">简单的例子 🌰</a></span>
+<span style="float: right">Next: <a href="./jike_api.html">即刻Web API</a></span></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">jike.objects</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>User</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;areaCode&#39;, &#39;avatarImage&#39;, &#39;backgroundImage&#39;, &#39;bio&#39;, &#39;birthday&#39;)
+(&#39;briefIntro&#39;, &#39;city&#39;, &#39;country&#39;, &#39;following&#39;, &#39;gender&#39;)
+(&#39;id&#39;, &#39;initUsername&#39;, &#39;isBetaUser&#39;, &#39;isLoginUser&#39;, &#39;isVerified&#39;)
+(&#39;mobilePhoneNumber&#39;, &#39;preferences&#39;, &#39;province&#39;, &#39;profileImageUrl&#39;, &#39;ref&#39;)
+(&#39;qqOpenId&#39;, &#39;screenName&#39;, &#39;updatedAt&#39;, &#39;userId&#39;, &#39;username&#39;)
+(&#39;usernameSet&#39;, &#39;verifyMessage&#39;, &#39;wechatOpenId&#39;, &#39;weiboUid&#39;, &#39;weiboUserInfo&#39;)
+(&#39;followedCount&#39;, &#39;followingCount&#39;, &#39;highlightedPersonalUpdates&#39;, &#39;liked&#39;, &#39;topicCreated&#39;)
+(&#39;topicSubscribed&#39;,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Topic</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Topic</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Topic</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;briefIntro&#39;, &#39;content&#39;, &#39;createdAt&#39;, &#39;enableForUserPost&#39;, &#39;enablePictureComments&#39;)
+(&#39;friendsAlsoSubscribe&#39;, &#39;id&#39;, &#39;isAnonymous&#39;, &#39;isDreamTopic&#39;, &#39;isValid&#39;)
+(&#39;keywords&#39;, &#39;lastMessagePostTime&#39;, &#39;likeIcon&#39;, &#39;maintainer&#39;, &#39;messagePrefix&#39;)
+(&#39;newCategory&#39;, &#39;operateStatus&#39;, &#39;pictureUrl&#39;, &#39;rectanglePicture&#39;, &#39;ref&#39;)
+(&#39;squarePicture&#39;, &#39;subscribedAt&#39;, &#39;subscribedStatusRawValue&#39;, &#39;subscribersCount&#39;, &#39;thumbnailUrl&#39;)
+(&#39;timeForRank&#39;, &#39;topicId&#39;, &#39;topicType&#39;, &#39;updatedAt&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>OfficialMessage</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">OfficialMessage</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">OfficialMessage</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;collectedTime&#39;, &#39;likeInfo&#39;)
+(&#39;topic&#39;, &#39;commentCount&#39;, &#39;read&#39;, &#39;isCommentForbidden&#39;, &#39;type&#39;)
+(&#39;pictures&#39;, &#39;liked&#39;, &#39;likeIcon&#39;, &#39;collected&#39;, &#39;id&#39;)
+(&#39;targetType&#39;, &#39;status&#39;, &#39;viewType&#39;, &#39;createdAt&#39;, &#39;target&#39;)
+(&#39;likeCount&#39;, &#39;video&#39;, &#39;collectTime&#39;, &#39;abstract&#39;, &#39;content&#39;)
+()
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>OriginalPost</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">OriginalPost</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">OriginalPost</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;collectedTime&#39;, &#39;likeInfo&#39;)
+(&#39;topic&#39;, &#39;poi&#39;, &#39;commentCount&#39;, &#39;read&#39;, &#39;messageId&#39;)
+(&#39;isCommentForbidden&#39;, &#39;type&#39;, &#39;pictures&#39;, &#39;liked&#39;, &#39;likeIcon&#39;)
+(&#39;collected&#39;, &#39;id&#39;, &#39;targetType&#39;, &#39;status&#39;, &#39;viewType&#39;)
+(&#39;createdAt&#39;, &#39;target&#39;, &#39;likeCount&#39;, &#39;collectTime&#39;, &#39;content&#39;)
+()
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Repost</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Repost</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Repost</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;collectedTime&#39;, &#39;likeInfo&#39;)
+(&#39;topic&#39;, &#39;commentCount&#39;, &#39;read&#39;, &#39;isCommentForbidden&#39;, &#39;type&#39;)
+(&#39;pictures&#39;, &#39;liked&#39;, &#39;likeIcon&#39;, &#39;collected&#39;, &#39;id&#39;)
+(&#39;syncCommentId&#39;, &#39;targetType&#39;, &#39;status&#39;, &#39;replyToComment&#39;, &#39;viewType&#39;)
+(&#39;createdAt&#39;, &#39;target&#39;, &#39;likeCount&#39;, &#39;collectTime&#39;, &#39;content&#39;)
+()
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Question</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Question</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Question</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;collectedTime&#39;, &#39;likeInfo&#39;)
+(&#39;topic&#39;, &#39;commentCount&#39;, &#39;read&#39;, &#39;isCommentForbidden&#39;, &#39;type&#39;)
+(&#39;pictures&#39;, &#39;liked&#39;, &#39;likeIcon&#39;, &#39;collected&#39;, &#39;updatedAt&#39;)
+(&#39;id&#39;, &#39;targetType&#39;, &#39;status&#39;, &#39;answerCount&#39;, &#39;viewType&#39;)
+(&#39;createdAt&#39;, &#39;target&#39;, &#39;likeCount&#39;, &#39;collectTime&#39;, &#39;title&#39;)
+(&#39;content&#39;,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Answer</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Answer</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Answer</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;collectedTime&#39;, &#39;likeInfo&#39;)
+(&#39;topic&#39;, &#39;richtextContent&#39;, &#39;commentCount&#39;, &#39;read&#39;, &#39;questionId&#39;)
+(&#39;isCommentForbidden&#39;, &#39;type&#39;, &#39;pictures&#39;, &#39;liked&#39;, &#39;voteTend&#39;)
+(&#39;likeIcon&#39;, &#39;collected&#39;, &#39;id&#39;, &#39;targetType&#39;, &#39;status&#39;)
+(&#39;upVoteCount&#39;, &#39;viewType&#39;, &#39;createdAt&#39;, &#39;target&#39;, &#39;likeCount&#39;)
+(&#39;collectTime&#39;, &#39;question&#39;, &#39;content&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>Comment</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Comment</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Comment</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;replyCount&#39;, &#39;collectedTime&#39;)
+(&#39;likeInfo&#39;, &#39;topic&#39;, &#39;level&#39;, &#39;commentCount&#39;, &#39;enablePictureComments&#39;)
+(&#39;read&#39;, &#39;threadId&#39;, &#39;isCommentForbidden&#39;, &#39;type&#39;, &#39;pictures&#39;)
+(&#39;liked&#39;, &#39;hotReplies&#39;, &#39;targetId&#39;, &#39;likeIcon&#39;, &#39;collected&#39;)
+(&#39;id&#39;, &#39;targetType&#39;, &#39;status&#39;, &#39;viewType&#39;, &#39;createdAt&#39;)
+(&#39;target&#39;, &#39;likeCount&#39;, &#39;collectTime&#39;, &#39;content&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>PersonalUpdateSection</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">PersonalUpdateSection</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PersonalUpdateSection</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;collectedTime&#39;, &#39;likeInfo&#39;)
+(&#39;topic&#39;, &#39;commentCount&#39;, &#39;read&#39;, &#39;isCommentForbidden&#39;, &#39;type&#39;)
+(&#39;pictures&#39;, &#39;liked&#39;, &#39;items&#39;, &#39;likeIcon&#39;, &#39;collected&#39;)
+(&#39;id&#39;, &#39;targetType&#39;, &#39;status&#39;, &#39;viewType&#39;, &#39;createdAt&#39;)
+(&#39;target&#39;, &#39;likeCount&#39;, &#39;collectTime&#39;, &#39;content&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>PersonalUpdate</code> 类可用的属性</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">PersonalUpdate</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PersonalUpdate</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;linkInfo&#39;, &#39;topics&#39;, &#39;repostCount&#39;, &#39;user&#39;, &#39;targetUsers&#39;)
+(&#39;collectedTime&#39;, &#39;likeInfo&#39;, &#39;topic&#39;, &#39;topicIds&#39;, &#39;usernames&#39;)
+(&#39;commentCount&#39;, &#39;read&#39;, &#39;actionTime&#39;, &#39;isCommentForbidden&#39;, &#39;type&#39;)
+(&#39;pictures&#39;, &#39;liked&#39;, &#39;users&#39;, &#39;likeIcon&#39;, &#39;collected&#39;)
+(&#39;targetUsernames&#39;, &#39;action&#39;, &#39;id&#39;, &#39;targetType&#39;, &#39;status&#39;)
+(&#39;viewType&#39;, &#39;createdAt&#39;, &#39;target&#39;, &#39;likeCount&#39;, &#39;collectTime&#39;)
+(&#39;updateIds&#39;, &#39;content&#39;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<p><span style="float: left">Prev: <a href="./example.html">简单的例子 🌰</a></span>
+<span style="float: right">Next: <a href="./jike_api.html">即刻Web API</a></span></p>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>
