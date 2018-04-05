@@ -16,6 +16,7 @@ Topic = namedtuple_with_defaults(
                    'createdAt',
                    'enableForUserPost',
                    'enablePictureComments',
+                   'friendsAlsoSubscribe',
                    'id',
                    'isAnonymous',
                    'isDreamTopic',

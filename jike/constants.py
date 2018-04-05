@@ -132,4 +132,6 @@ ENDPOINTS = {
     # search
     'search_topic': '{_s_}://{_d_}/{_v_}/users/topics/search'.format(**_f_),
     'search_collection': '{_s_}://{_d_}/{_v_}/users/collections/search'.format(**_f_),
+    # recommend
+    'recommended_topic': '{_s_}://{_d_}/{_v_}/topics/recommendation/list'.format(**_f_),
 }

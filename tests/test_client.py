@@ -427,6 +427,15 @@ class TestJikeClient(unittest.TestCase):
         self.MockList.assert_called_once()
         mock_collections.load_more.assert_called_once()
 
+    def test_get_recommended_topics(self):
+        mock_topics = Mock()
+        self.MockList.return_value = mock_topics
+        self.MockList.load_more.return_value = None
+        result = self.jike_client.get_recommended_topic()
+        self.assertEqual(result, mock_topics)
+        self.MockList.assert_called_once()
+        mock_topics.load_more.assert_called_once()
+
     def test__create_new_jike_session(self):
         self.jike_client.auth_token = 'new_token'
         self.jike_client._create_new_jike_session()

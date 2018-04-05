@@ -314,6 +314,13 @@ class JikeClient:
         messages.load_more()
         return messages
 
+    def get_recommended_topic(self):
+        topics = List(self.jike_session, ENDPOINTS['recommended_topic'], type_converter=Topic, fixed_extra_payload={
+            'categoryAlias': 'RECOMMENDATION',
+        })
+        topics.load_more()
+        return topics
+
     def create_emitter(self, endpoint, fixed_extra_payload=()):
         """
         BOOM! You find easter egg in this project, now you can use this function to crawl Jike.
