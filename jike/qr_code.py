@@ -68,4 +68,4 @@ class JikeSvgPathImage(SvgPathImage):
         units = Decimal(pixels) / 3
         if not text:
             return units
-        return '%smm' % units
+        return '{}mm'.format(units)

@@ -65,8 +65,7 @@ RENDER2BROWSER_HTML_TEMPLATE = Template("""
         <div class="footer_line"><strong>Code Reviews</strong>, <strong>Feedbacks</strong> and <strong>Contributions</strong> are warmly welcome.</div>
         <div class="footer_line">
             <a href="https://github.com/Sorosliu1029/Jike-Metro/issues/new" target="_blank">Open an issue</a> or
-            <!--TODO Fulfill href here-->
-            <a href="#" target="_blank">Leave a comment</a>
+            <a href="https://web.okjike.com/post-detail/5ac430c953857e0017d13104/originalPost" target="_blank">Leave a comment</a>
         </div>
     </div>
 </div>
@@ -77,8 +76,7 @@ RENDER2BROWSER_HTML_TEMPLATE = Template("""
 HEADERS = {
     'Origin': 'http://web.okjike.com',
     'Referer': 'http://web.okjike.com',
-    # TODO change User-Agent to 'Jike Metro' once published
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+    'User-Agent': 'Jike Metro',
     'Accept': 'application/json',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -133,4 +131,5 @@ ENDPOINTS = {
     'comment_it': '{_s_}://{_d_}/{_v_}/comments/add'.format(**_f_),
     # search
     'search_topic': '{_s_}://{_d_}/{_v_}/users/topics/search'.format(**_f_),
+    'search_collection': '{_s_}://{_d_}/{_v_}/users/collections/search'.format(**_f_),
 }
