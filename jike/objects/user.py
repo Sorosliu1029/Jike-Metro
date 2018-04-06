@@ -33,6 +33,7 @@ User = namedtuple_with_defaults(
                    'profileImageUrl',
                    'ref',
                    'qqOpenId',
+                   'qqUserInfo',
                    'screenName',
                    'updatedAt',
                    'userId',
@@ -40,6 +41,7 @@ User = namedtuple_with_defaults(
                    'usernameSet',
                    'verifyMessage',
                    'wechatOpenId',
+                   'wechatUserInfo',
                    'weiboUid',
                    'weiboUserInfo',
 
