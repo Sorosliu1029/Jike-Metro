@@ -1,14 +1,21 @@
+import sys
+import os
 from setuptools import setup, find_packages
 from codecs import open
-from os import path
 
-here = path.abspath(path.dirname(__file__))
+here = os.path.abspath(os.path.dirname(__file__))
 
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+# 'setup.py publish' shortcut.
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py bdist_wheel')
+    os.system('twine upload dist/*')
+    sys.exit()
+
+with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     readme = f.read()
 
 about = {}
-with open(path.join(here, 'jike', '__init__.py'), encoding='utf-8') as f:
+with open(os.path.join(here, 'jike', '__init__.py'), encoding='utf-8') as f:
     exec('\n'.join(filter(lambda l: l.startswith('__'), f.readlines())), about)
 
 setup(

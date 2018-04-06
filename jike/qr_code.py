@@ -87,14 +87,14 @@ class JikeSvgPathImage(SvgImage):
         units = Decimal(pixels) / 3
         if not text:
             return units
-        return '%smm' % units
+        return '{}mm'.format(units)
 
     def _rect(self, row, col):
         x, y = self.pixel_box(row, col)[0]
         return ET.Element(
             'rect', x=self.units(x), y=self.units(y),
             width=self.unit_size, height=self.unit_size,
-            fill=self.colors[row*49+col]
+            fill=self.colors[row * 49 + col]
         )
 
 

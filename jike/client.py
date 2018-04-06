@@ -298,10 +298,25 @@ class JikeClient:
 
     def search_topic(self, keywords):
         assert isinstance(keywords, str)
-        topics = List(self.jike_session, ENDPOINTS['search_topic'], type_converter=dict, fixed_extra_payload={
+        topics = List(self.jike_session, ENDPOINTS['search_topic'], type_converter=Topic, fixed_extra_payload={
             'keywords': keywords,
             'onlyUserPostEnabled': False,
             'type': 'ALL'
+        })
+        topics.load_more()
+        return topics
+
+    def search_collection(self, keywords):
+        assert isinstance(keywords, str)
+        messages = List(self.jike_session, ENDPOINTS['search_collection'], fixed_extra_payload={
+            'keywords': keywords,
+        })
+        messages.load_more()
+        return messages
+
+    def get_recommended_topic(self):
+        topics = List(self.jike_session, ENDPOINTS['recommended_topic'], type_converter=Topic, fixed_extra_payload={
+            'categoryAlias': 'RECOMMENDATION',
         })
         topics.load_more()
         return topics
