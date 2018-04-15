@@ -234,7 +234,7 @@ class Stream(JikeStreamBase, JikeFetcher):
         result = super().fetch_more(self.endpoint, payload)
         updates = []
         for item in result['data']:
-            if item['id'] != current_latest_id:
+            if item.get('id') != current_latest_id:
                 updates.append(converter[item['type']](**item))
             else:
                 break
