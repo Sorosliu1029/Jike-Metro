@@ -37,7 +37,7 @@ def notify_update(obj, unread):
         for message in t:
             assert hasattr(message, 'type') and hasattr(message, 'content')
             if message.type == 'OFFICIAL_MESSAGE' and (message.topic['content'] in obj.notified_topics or 'all' in obj.notified_topics):
-                title = '主题: {} 有更新'.format(message.topic['content'])
+                title = '{} 更新了'.format(message.topic['content'])
                 msg = message.content
                 notify(title, msg)
             elif message.type == 'ORIGINAL_POST' and (message.user['screenName'] in obj.notified_users or 'all' in obj.notified_users):

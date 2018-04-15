@@ -57,7 +57,7 @@ RENDER2BROWSER_HTML_TEMPLATE = Template("""
 </head>
 <body>
 <div class="container">
-    <div class="header">Scan for Ⓙ 🚇 🎟️</div>
+    <div class="header">Scan for 🚇 🎟️</div>
     ${qrcode_svg}
     <div class="footer container">
         <div class="footer_line">🚧 with 🐈 by 👷 <a href="https://web.okjike.com/user/WalleMax/" target="_blank">挖地道的</a></div>
