@@ -9,12 +9,6 @@ import tempfile
 import webbrowser
 from decimal import Decimal
 from qrcode.image.svg import SvgImage
-try:
-    import lxml.etree as ET
-except ImportError:
-    import xml.etree.ElementTree as ET
-import qrcode.image.base
-
 from .constants import JIKE_URI_SCHEME_FMT, RENDER2BROWSER_HTML_TEMPLATE
 
 
@@ -74,12 +68,4 @@ class JikeSvgPathImage(SvgImage):
         units = Decimal(pixels) / 3
         if not text:
             return units
-        return '{}mm'.format(units)
-
-    # def _rect(self, row, col):
-    #     x, y = self.pixel_box(row, col)[0]
-    #     return ET.Element(
-    #         'rect', x=self.units(x), y=self.units(y),
-    #         width=self.unit_size, height=self.unit_size,
-    #         fill=self.colors[row * 49 + col]
-    #     )
+        return '{:.2f}mm'.format(units)
