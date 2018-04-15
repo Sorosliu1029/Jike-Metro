@@ -4,6 +4,7 @@
 *.egg-info
 metro.json
 poc/
+nlp/*.txt
 .cache/
 build/
 dist/
