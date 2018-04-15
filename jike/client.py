@@ -19,7 +19,7 @@ def check_unread_count_periodically(obj):
     obj.get_news_feed_unread_count()
     unread = auto_load_unread(obj)
     auto_like(obj, unread)
-    notify_update(unread)
+    notify_update(obj, unread)
     Timer(
         CHECK_UNREAD_COUNT_PERIOD,
         check_unread_count_periodically,
@@ -37,18 +37,19 @@ def auto_like(obj, unread):
     _, following_update = unread
     for m in following_update:
         if m.type in ('ORIGINAL_POST', 'REPOST'):
-            obj.like_it(m)
+            if m.user['screenName'] in obj.auto_like_users:
+                obj.like_it(m)
 
 
-def notify_update(unread):
+def notify_update(obj, unread):
     for t in unread:
         for message in t:
             assert hasattr(message, 'type') and hasattr(message, 'content')
-            if message.type == 'OFFICIAL_MESSAGE':
+            if message.type == 'OFFICIAL_MESSAGE' and message.topic['content'] in obj.notified_topics:
                 title = '主题: {} 有更新'.format(message.topic['content'])
                 msg = message.content
                 notify(title, msg)
-            elif message.type == 'ORIGINAL_POST':
+            elif message.type == 'ORIGINAL_POST' and message.user['screenName'] in obj.notified_users:
                 title = '{} 发动态了'.format(message.user['screenName'])
                 msg = message.content
                 notify(title, msg)
@@ -77,6 +78,10 @@ class JikeClient:
                 check_unread_count_periodically,
                 args=(self,)
             ).start()
+
+        self.auto_like_users = []
+        self.notified_topics = []
+        self.notified_users = []
 
     def __del__(self):
         if self.timer:
@@ -368,7 +373,12 @@ class JikeClient:
                 return self.following_update.load_update(unread_count=self.unread_count)
         else:
             raise ValueError('choice only can be "news_feed" or "following_update"')
-        return [], []
+        return []
+
+    def set_automatic_rules(self, auto_like_users, notified_topics, notified_users):
+        self.auto_like_users = auto_like_users
+        self.notified_topics = notified_topics
+        self.notified_users = notified_users
 
     def _create_new_jike_session(self):
         """
