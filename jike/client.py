@@ -14,21 +14,44 @@ from .constants import ENDPOINTS, URL_VALIDATION_PATTERN, CHECK_UNREAD_COUNT_PER
 
 def check_unread_count_periodically(obj):
     """
-    Run periodical task to check unread count
-
-    This implementation looks awkward, improvement wanted.
-    Better not to include third-party library
-
-    :param obj: JikeClient
-    :return: None
+    Run periodical task to check unread count and do some automatic task
     """
     obj.get_news_feed_unread_count()
-    timer = Timer(
+    unread = auto_load_unread(obj)
+    auto_like(obj, unread)
+    notify_update(unread)
+    Timer(
         CHECK_UNREAD_COUNT_PERIOD,
         check_unread_count_periodically,
         args=(obj,)
-    )
-    timer.start()
+    ).start()
+
+
+def auto_load_unread(obj):
+    unread_news_feed = obj._load_unread('news_feed')
+    unread_following_update = obj._load_unread('following_update')
+    return unread_news_feed, unread_following_update
+
+
+def auto_like(obj, unread):
+    _, following_update = unread
+    for m in following_update:
+        if m.type in ('ORIGINAL_POST', 'REPOST'):
+            obj.like_it(m)
+
+
+def notify_update(unread):
+    for t in unread:
+        for message in t:
+            assert hasattr(message, 'type') and hasattr(message, 'content')
+            if message.type == 'OFFICIAL_MESSAGE':
+                title = '主题: {} 有更新'.format(message.topic['content'])
+                msg = message.content
+                notify(title, msg)
+            elif message.type == 'ORIGINAL_POST':
+                title = '{} 发动态了'.format(message.user['screenName'])
+                msg = message.content
+                notify(title, msg)
 
 
 class JikeClient:
@@ -53,8 +76,7 @@ class JikeClient:
                 CHECK_UNREAD_COUNT_PERIOD,
                 check_unread_count_periodically,
                 args=(self,)
-            )
-            self.timer.start()
+            ).start()
 
     def __del__(self):
         if self.timer:
@@ -329,6 +351,24 @@ class JikeClient:
         """
         assert endpoint in ENDPOINTS.values()
         return JikeEmitter(self.jike_session, endpoint, fixed_extra_payload)
+
+    def schedule_my_post(self, content, link=None, topic_id=None, pictures=None, *, delay=None):
+        assert isinstance(delay, int) and delay > 0, 'Please provide a delay time'
+        post_fn = self.create_my_post
+        timer = Timer(delay, post_fn, args=(content, link, topic_id, pictures))
+        timer.start()
+        return timer
+
+    def _load_unread(self, choice):
+        if choice == 'news_feed':
+            if self.news_feed:
+                return self.news_feed.load_update(unread_count=self.unread_count)
+        elif choice == 'following_update':
+            if self.following_update:
+                return self.following_update.load_update(unread_count=self.unread_count)
+        else:
+            raise ValueError('choice only can be "news_feed" or "following_update"')
+        return [], []
 
     def _create_new_jike_session(self):
         """

@@ -7,6 +7,7 @@ utils
 import requests
 import json
 import os
+import platform
 from collections import defaultdict
 from mimetypes import guess_type
 
@@ -141,3 +142,12 @@ def upload_pictures(picture_paths):
         picture_paths = [picture_paths]
     pic_url = [upload_a_picture(picture) for picture in picture_paths]
     return pic_url
+
+
+def notify(title, message):
+    assert isinstance(title, str), 'please provide string as title'
+    assert isinstance(message, str), 'please provide string as message'
+    if 'Darwin' not in platform.system():
+        return 'Only support macOS system'
+    cmd = """/usr/bin/osascript -e 'display notification "{msg}" with title "{title}"'""".format(title=title, msg=message)
+    os.system(cmd)
