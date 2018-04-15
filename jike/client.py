@@ -357,10 +357,10 @@ class JikeClient:
     def _load_unread(self, choice):
         if choice == 'news_feed':
             if self.news_feed:
-                return self.news_feed.load_update(unread_count=self.unread_count)
+                return self.news_feed.load_update(unread_count=self.unread_count+3)
         elif choice == 'following_update':
             if self.following_update:
-                return self.following_update.load_update(unread_count=self.unread_count)
+                return self.following_update.load_update(unread_count=self.unread_count+3)
         else:
             raise ValueError('choice only can be "news_feed" or "following_update"')
         return []
