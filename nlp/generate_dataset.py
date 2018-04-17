@@ -2,11 +2,10 @@
 
 from faker import Faker
 import random
+import sys
 from babel.dates import format_time
 
 fake = Faker()
-fake.seed(1234)
-random.seed(1234)
 
 TRANS_TABLE = str.maketrans({
     '1': '一',
@@ -23,15 +22,10 @@ TRANS_TABLE = str.maketrans({
 
 ZH_ABS_FORMATS = [
     'short',
-    'medium',
     'ah点m分',
-    'ah点m分s秒',
     'ah点mm分',
-    'ah点mm分ss秒',
     'H点m分',
-    'H点m分s秒',
     'H点mm分',
-    'H点mm分ss秒',
 ]
 
 EN_ABS_FORMATS = [
@@ -97,7 +91,7 @@ def generate_date(locale):
 
     dt = fake.future_datetime(end_date='+30d')
 
-    machine_readable = dt.strftime('%H:%M:%S')
+    machine_readable = dt.strftime('%H:%M')
     human_readable = format_time(dt, format=random.choice(formats), locale=locale)
 
     r = random.random()
@@ -116,15 +110,25 @@ def generate_date(locale):
     return human_readable, machine_readable, dt
 
 
-def generate_dataset(n, locale='zh'):
+def generate_dataset(n, locale):
     lines = []
     for i in range(n):
         h, m, _ = generate_date(locale)
-        lines.append(m.ljust(12) + ',' + h + '\n')
+        lines.append(m.ljust(9) + ',' + h + '\n')
 
     with open('dataset_{}_{}.txt'.format(locale, n), 'wt', encoding='utf-8') as f:
         f.writelines(lines)
 
 
+def main(p, locale):
+    fake.seed(pow(2, p))
+    random.seed(pow(2, p))
+    generate_dataset(pow(10, p), locale)
+
 if __name__ == '__main__':
-    generate_dataset(int(1e5))
+    p, locale = sys.argv[1:3]
+    p = int(p)
+    assert p >= 1
+    assert locale in ('zh', 'en')
+    main(p, locale)
+    

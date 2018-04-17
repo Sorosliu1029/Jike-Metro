@@ -12,7 +12,7 @@ def load_dataset(n, locale):
     with open('dataset_{}_{}.txt'.format(locale, n), 'rt', encoding='utf-8') as f:
         for line in f.readlines():
             m, h = line.split(',')
-            m, h = m.ljust(12), h.strip()
+            m, h = m.ljust(9), h.strip()
             dataset.append((h, m))
             human_vocab.update(tuple(h))
             machine_vocab.update(tuple(m))
@@ -41,7 +41,7 @@ def string2int(string, length, vocab):
     if len(string) > length:
         string = string[:length]
 
-    rep = list(map(lambda x: vocab.get(x, '<unk>'), string))
+    rep = list(map(lambda x: vocab[x] if x in vocab else vocab['<unk>'], string))
 
     if len(string) < length:
         rep += [vocab['<pad>']] * (length - len(string))
@@ -72,88 +72,15 @@ def softmax(x, axis=1):
     else:
         raise ValueError('Cannot apply softmax to a tensor that is 1D')
 
-def plot_attention_map(model, input_vocabulary, inv_output_vocabulary, text, n_s = 128, num = 6, Tx = 30, Ty = 10):
-    """
-    Plot the attention map.
-  
-    """
-    attention_map = np.zeros((10, 30))
-    Ty, Tx = attention_map.shape
-    
-    s0 = np.zeros((1, n_s))
-    c0 = np.zeros((1, n_s))
-    layer = model.layers[num]
+def run_examples(model, input_vocabulary, inv_output_vocabulary, examples, Tx, s0, c0):
+    source = np.array([string2int(example, Tx, input_vocabulary) for example in examples])
+    source = np.array(list(map(lambda x: to_categorical(x, num_classes=len(input_vocabulary)), source)))
+    prediction = model.predict([source, s0, c0])
+    prediction = np.argmax(prediction, axis = -1).transpose()
 
-    encoded = np.array(string_to_int(text, Tx, input_vocabulary)).reshape((1, 30))
-    encoded = np.array(list(map(lambda x: to_categorical(x, num_classes=len(input_vocabulary)), encoded)))
-
-    f = K.function(model.inputs, [layer.get_output_at(t) for t in range(Ty)])
-    r = f([encoded, s0, c0])
-    
-    for t in range(Ty):
-        for t_prime in range(Tx):
-            attention_map[t][t_prime] = r[t][0,t_prime,0]
-
-    # Normalize attention map
-#     row_max = attention_map.max(axis=1)
-#     attention_map = attention_map / row_max[:, None]
-
-    prediction = model.predict([encoded, s0, c0])
-    
-    predicted_text = []
-    for i in range(len(prediction)):
-        predicted_text.append(int(np.argmax(prediction[i], axis=1)))
-        
-    predicted_text = list(predicted_text)
-    predicted_text = int_to_string(predicted_text, inv_output_vocabulary)
-    text_ = list(text)
-    
-    # get the lengths of the string
-    input_length = len(text)
-    output_length = Ty
-    
-    # Plot the attention_map
-    plt.clf()
-    f = plt.figure(figsize=(8, 8.5))
-    ax = f.add_subplot(1, 1, 1)
-
-    # add image
-    i = ax.imshow(attention_map, interpolation='nearest', cmap='Blues')
-
-    # add colorbar
-    cbaxes = f.add_axes([0.2, 0, 0.6, 0.03])
-    cbar = f.colorbar(i, cax=cbaxes, orientation='horizontal')
-    cbar.ax.set_xlabel('Alpha value (Probability output of the "softmax")', labelpad=2)
-
-    # add labels
-    ax.set_yticks(range(output_length))
-    ax.set_yticklabels(predicted_text[:output_length])
-
-    ax.set_xticks(range(input_length))
-    ax.set_xticklabels(text_[:input_length], rotation=45)
-
-    ax.set_xlabel('Input Sequence')
-    ax.set_ylabel('Output Sequence')
-
-    # add grid and legend
-    ax.grid()
-
-    #f.show()
-    
-    return attention_map
-
-EXAMPLES = ['明天下午3:04', '这周六10:20', '上午9点10分', '10分钟以后']
-
-def run_example(model, input_vocabulary, inv_output_vocabulary, text):
-    encoded = string2int(text, TIME_STEPS, input_vocabulary)
-    prediction = model.predict(np.array([encoded]))
-    prediction = np.argmax(prediction[0], axis=-1)
-    return int2string(prediction, inv_output_vocabulary)
-
-def run_examples(model, input_vocabulary, inv_output_vocabulary, examples=EXAMPLES):
     predicted = []
-    for example in examples:
-        predicted.append(''.join(run_example(model, input_vocabulary, inv_output_vocabulary, example)))
-        print('input:', example)
-        print('output:', predicted[-1])
-    return predicted
+    for i in range(len(examples)):
+        output = [inv_output_vocabulary[int(j)] for j in prediction[i]]
+        predicted.append(''.join(output))
+
+    return zip(examples, predicted)
