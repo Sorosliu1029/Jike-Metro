@@ -223,7 +223,12 @@ class Stream(JikeStreamBase, JikeFetcher):
         assert isinstance(unread_count, int) and unread_count >= 0
         if unread_count == 0:
             return []
-        current_latest_id = None if len(self) == 0 else self[0].id
+        if len(self) == 0:
+            current_latest_id = None
+        elif self[0].id is not None:
+            current_latest_id = self[0].id
+        else:
+            current_latest_id = self[0]['items'][0]['id']
         payload = {
             'trigger': 'user',
             'limit': unread_count,
