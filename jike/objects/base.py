@@ -223,12 +223,14 @@ class Stream(JikeStreamBase, JikeFetcher):
         assert isinstance(unread_count, int) and unread_count >= 0
         if unread_count == 0:
             return []
+
         if len(self) == 0:
             current_latest_id = None
         elif self[0].id is not None:
             current_latest_id = self[0].id
         else:
-            current_latest_id = self[0]['items'][0]['id']
+            current_latest_id = self[1].id
+
         payload = {
             'trigger': 'user',
             'limit': unread_count,
@@ -238,8 +240,8 @@ class Stream(JikeStreamBase, JikeFetcher):
         payload.update(dict(extra_payload))
         result = super().fetch_more(self.endpoint, payload)
         updates = []
-        for item in result['data']:
-            if item.get('id') != current_latest_id:
+        for item in [t for t in result['data'] if t.get('type') != 'PERSONAL_UPDATE_SECTION']:
+            if item['id'] != current_latest_id:
                 updates.append(converter[item['type']](**item))
             else:
                 break

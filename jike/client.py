@@ -377,7 +377,7 @@ class JikeClient:
         """
         return JikeSession(self.auth_token)
 
-    def _relogin(self):
+    def relogin(self):
         """
         Re-login in case any problem related to auth_token
         """
