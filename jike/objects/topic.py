@@ -39,6 +39,7 @@ Topic = namedtuple_with_defaults(
                    'timeForRank',
                    'topicId',
                    'topicType',
+                   'type',
                    'updatedAt'
                ])
 )
