@@ -27,6 +27,8 @@ PUBLIC_FIELDS = [
     'user',
     'isCommentForbidden',
     'viewType',
+    'urlsInText',
+    'isFeatured',
     # item interaction info
     'likeCount',
     'likeIcon',
