@@ -18,6 +18,8 @@ PUBLIC_FIELDS = [
     'createdAt',
     'content',
     'pictures',
+    'video',
+    'audio',
     'status',
     'topic',
     'linkInfo',
@@ -77,6 +79,7 @@ Question = namedtuple_with_defaults(
                    'answerCount',
                    'title',
                    'updatedAt',
+                   'userAnswerId',
                ])))
 )
 
