@@ -18,7 +18,7 @@ Jike Client
 from .client import JikeClient
 
 __title__ = 'jike'
-__version__ = '0.5.0'
+__version__ = '1.0.0'
 __description__ = 'Jike Metro 🚇 : Jike Python SDK'
 __url__ = 'https://github.com/Sorosliu1029/Jike-Metro'
 __author__ = 'Soros Liu'

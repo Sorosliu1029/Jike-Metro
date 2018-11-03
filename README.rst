@@ -81,7 +81,7 @@ Jike Metro 🚇 目前支持：
 - 根据关键词搜索自己的收藏
 - 获取即刻首页的推荐关注主题列表（不限于首页显示的5个）
 
-Jike Metro 🚇 现在支持 Python 3.4-3.6
+Jike Metro 🚇 现在支持 Python 3.6
 
 Jike Metro 🚇 入口
 ==================

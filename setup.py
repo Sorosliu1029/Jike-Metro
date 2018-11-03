@@ -27,21 +27,15 @@ setup(
     author=about['__author__'],
     author_email=about['__author_email__'],
     license=about['__license__'],
-    python_requires="!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
+    python_requires="~=3.6",
     classifiers=[
-        #   4 - Beta
-        #   5 - Production/Stable
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
-        'Topic :: Internet :: WWW/HTTP :: Browsers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPy'
     ],
     keywords=about['__keywords__'],
     packages=find_packages(exclude=['docs', 'tests']),

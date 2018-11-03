@@ -2,9 +2,8 @@
 *.pyc
 .tox/
 *.egg-info
+.eggs/
 metro.json
-poc/
-nlp/*.txt
 .cache/
 build/
 dist/

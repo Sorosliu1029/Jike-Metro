@@ -60,7 +60,7 @@ RENDER2BROWSER_HTML_TEMPLATE = Template("""
     <div class="header">Scan for 🚇 🎟️</div>
     ${qrcode_svg}
     <div class="footer container">
-        <div class="footer_line">🚧 with 🐈 by 👷 <a href="https://web.okjike.com/user/WalleMax/" target="_blank">挖地道的</a></div>
+        <div class="footer_line">🚧 with 🐈 by 👷 <a href="https://web.okjike.com/user/WalleMax/" target="_blank">搞即建的</a></div>
         <div class="footer_line">GitHub: <a href="https://github.com/Sorosliu1029/Jike-Metro" target="_blank">Jike Metro</a></div>
         <div class="footer_line"><strong>Code Reviews</strong>, <strong>Feedbacks</strong> and <strong>Contributions</strong> are warmly welcome.</div>
         <div class="footer_line">
@@ -80,7 +80,6 @@ HEADERS = {
     'Accept': 'application/json',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-
     'x-jike-app-auth-jwt': None,
     'App-Version': '4.1.0',
     'DNT': '1',
