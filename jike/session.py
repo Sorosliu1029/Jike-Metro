@@ -13,7 +13,7 @@ class JikeSession:
         self.session = requests.Session()
         self.token = token
         self.headers = dict(HEADERS)
-        self.headers.update({'x-jike-app-auth-jwt': token})
+        self.headers.update({'x-jike-access-token': token})
 
     def __del__(self):
         self.session.close()

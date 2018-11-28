@@ -51,7 +51,6 @@ User = namedtuple_with_defaults(
                    'weiboUid',
                    'weiboUserInfo',
                    'zodiac',
-
                    'followedCount',
                    'followingCount',
                    'highlightedPersonalUpdates',
