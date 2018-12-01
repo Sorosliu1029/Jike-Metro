@@ -58,6 +58,15 @@ User = namedtuple_with_defaults(
                    'liked',
                    'topicCreated',
                    'topicSubscribed',
+
+                   'groupId',
+                   'groupVersion',
+                   'industry',
+                   'lastChangeNameTime',
+                   'statsCount',
+                   'trailingIcons',
+                   'wechatUnionId',
                ])
 )
-User.__repr__ = lambda user: 'User(screenName={screenName})'.format(screenName=user.screenName)
+User.__repr__ = lambda user: 'User(screenName={screenName})'.format(
+    screenName=user.screenName)
