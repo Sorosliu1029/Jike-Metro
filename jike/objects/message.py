@@ -43,6 +43,7 @@ PUBLIC_FIELDS = [
     'collected',
     'collectedTime',
     'collectTime',  # seems to be Jike typo
+    'rollouts',
 ]
 
 # Object type for type: 'OFFICIAL_MESSAGE'
