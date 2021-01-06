@@ -62,7 +62,7 @@ Jike Metro 🚇 简易乘车指南
     >>> c.create_my_post(content='Jike Metro 🚇 released!', link='https://github.com/Sorosliu1029/Jike-Metro')
     True
 
-更详细的乘车指南请移步 👉 `Jike Metro 🚇 乘车指南 <https://www.0x2beace.me/Jike-Metro/>`_
+更详细的乘车指南请移步 👉 `Jike Metro 🚇 乘车指南 <https://jike-metro.sorosliu.xyz/>`_
 
 Jike Metro 🚇 乘车体验
 ======================
