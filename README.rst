@@ -38,7 +38,7 @@ Jike Metro 🚇 是即刻镇的地铁工程，旨在提高即友的出行游览�
 
 **安全提醒**：Jike Metro 🚇 目前是地下工作，非官方授权，随时可能翻车，给果果 🐈 买小鱼干可保平安。
 
-.. image:: https://cdn.ruguoapp.com/Ftub2jUf092k6GYua0DTV8t-PMoR.jpg?imageView2/0/w/2000/h/400/q/50
+.. image:: https://cdn.jellow.site/Ftub2jUf092k6GYua0DTV8t-PMoR.jpg?imageView2/0/w/2000/h/400/q/50
 
 图片来源: `即刻九号工友“果果”和小伙伴们 <https://web.okjike.com/topic/55d6de4660b2719eb447649a/official>`_
 
